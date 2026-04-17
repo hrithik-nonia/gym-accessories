@@ -17,7 +17,7 @@ const ProductSectionOne = () => {
   return (
     <>
       <div>
-        <h1 className="text-[#141414] text-[30px] sm:text-[44px]  font-bold text-center mt-16  ">
+        <h1 className="text-[#141414] text-[30px] sm:text-[44px]  font-bold text-center mt-16  font-serif">
           Up to 20% off Selected Items
         </h1>
         <p className="text-center font-light text-[#141414] mt-3">
