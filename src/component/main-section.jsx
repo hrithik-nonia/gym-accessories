@@ -3,6 +3,9 @@ import NavBar from "./navbar";
 import HeroSection from "./hero-section";
 import ProductSectionOne from "./product-section-1";
 import ProductSectionTwo from "./product-section-2";
+import ProductSectionThree from "./product-section-3";
+import EndSection from "./end-section";
+import FormSection from "./form-section";
 
 const MainSection = () => {
   return (
@@ -21,6 +24,12 @@ const MainSection = () => {
       <ProductSectionOne></ProductSectionOne>
       {/* ---------product section 2 --------- */}
       <ProductSectionTwo></ProductSectionTwo>
+      {/* ----------product section 3---------- */}
+      <ProductSectionThree></ProductSectionThree>
+      {/* ----------ending section---------- */}
+      <EndSection></EndSection>
+      {/* -----------form section------------- */}
+      <FormSection></FormSection>
     </>
   );
 };
