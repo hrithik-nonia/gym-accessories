@@ -1,7 +1,8 @@
 import gymImg from "../assets/banner-1.avif";
 import NavBar from "./navbar";
 import HeroSection from "./hero-section";
-import HorizontalScroll from "./product-section-1";
+import ProductSectionOne from "./product-section-1";
+
 const MainSection = () => {
   return (
     <>
@@ -16,7 +17,7 @@ const MainSection = () => {
       </div>
 
       {/* --------- product section 1 ---------- */}
-      <HorizontalScroll></HorizontalScroll>
+      <ProductSectionOne></ProductSectionOne>
     </>
   );
 };
