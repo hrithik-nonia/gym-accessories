@@ -6,6 +6,7 @@ import ProductSectionTwo from "./product-section-2";
 import ProductSectionThree from "./product-section-3";
 import EndSection from "./end-section";
 import FormSection from "./form-section";
+import Footer from "./footer";
 
 const MainSection = () => {
   return (
@@ -30,6 +31,8 @@ const MainSection = () => {
       <EndSection></EndSection>
       {/* -----------form section------------- */}
       <FormSection></FormSection>
+      {/* -----------footer section---------- */}
+      <Footer></Footer>
     </>
   );
 };
