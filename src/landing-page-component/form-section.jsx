@@ -1,4 +1,5 @@
 import formImg from "../assets/form_img.avif";
+
 const FormSection = () => {
   return (
     <>
