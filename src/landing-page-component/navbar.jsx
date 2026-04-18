@@ -1,6 +1,7 @@
 import { RxAvatar } from "react-icons/rx";
 import { CiShoppingCart } from "react-icons/ci";
 import Heading from "./heading";
+import { Link } from "react-scroll";
 
 const NavBar = () => {
   return (
@@ -25,6 +26,8 @@ const NavBar = () => {
                 Home
               </a>
             </li>
+
+            {/* --------shop all btn--------- */}
             <li className="relative group">
               <a href="#" className="text-[#141414]">
                 shop All
@@ -50,10 +53,18 @@ const NavBar = () => {
                 </a>
               </div>
             </li>
+
+            {/* --------contect btn---------- */}
             <li>
-              <a href="#" className="text-[#141414]">
+              <Link
+                href="#"
+                className="text-[#141414]"
+                to="contect"
+                smooth={true}
+                duration={1500}
+              >
                 Contact
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#" className="text-[#141414] flex gap-2">
