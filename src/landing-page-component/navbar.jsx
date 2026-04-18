@@ -25,10 +25,30 @@ const NavBar = () => {
                 Home
               </a>
             </li>
-            <li>
+            <li className="relative group">
               <a href="#" className="text-[#141414]">
                 shop All
               </a>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 bg-[#fffcfc] border border-gray-200 rounded-lg py-2 min-w-[170px] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50 translate-y-[-6px] group-hover:translate-y-0">
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-[13px] text-[#141414] hover:bg-gray-50 hover:text-[#a9977b]"
+                >
+                  Weight Traning
+                </a>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-[13px] text-[#141414] hover:bg-gray-50 hover:text-[#a9977b]"
+                >
+                  Yoga & Pilates
+                </a>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-[13px] text-[#141414] hover:bg-gray-50 hover:text-[#a9977b]"
+                >
+                  Fitness Accessories
+                </a>
+              </div>
             </li>
             <li>
               <a href="#" className="text-[#141414]">
