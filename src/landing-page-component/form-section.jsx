@@ -3,7 +3,10 @@ import formImg from "../assets/form_img.avif";
 const FormSection = () => {
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 bg-[#142026]">
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 bg-[#142026]"
+        id="formSection"
+      >
         {/* ---------img div-------- */}
         <div
           className="min-h-[400px] md:min-h-full bg-fixed bg-center bg-cover bg-no-repeat"
