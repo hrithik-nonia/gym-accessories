@@ -11,9 +11,12 @@ const EndSection = () => {
 
         {/* ---------shop all button---------- */}
         <div className="flex justify-center mt-2 ">
-          <button className="bg-[#141414] text-white rounded-xl px-6 py-3 text-sm mt-6 hover:bg-[#142026] hover:scale-105 transition duration-300 cursor-pointer ">
+          <a
+            href="/shopNowPage"
+            className="bg-[#141414] text-white rounded-xl px-6 py-3 text-sm mt-6 hover:bg-[#142026] hover:scale-105 transition duration-300 cursor-pointer "
+          >
             Shop All
-          </button>
+          </a>
         </div>
       </div>
     </>
