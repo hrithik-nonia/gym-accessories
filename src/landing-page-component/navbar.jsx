@@ -15,7 +15,7 @@ const NavBar = () => {
       {/* ---------add heading-------- */}
       <Heading></Heading>
 
-      <div className="bg-[#fffcfc] flex items-center h-17">
+      <div className="bg-[#fffcfc] flex items-center h-17 border">
         {/* -------logo container ------------ */}
         <div className="bg-[#1f2126] lg:w-1/5 py-4 text-center px-2 w-full h-full">
           <a href="#" className="text-[#fffcfc] text-[25px] font-bold ">
