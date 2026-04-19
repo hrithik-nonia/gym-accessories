@@ -119,8 +119,8 @@ export default function PriceRangeSlider() {
 
       {/* Tick labels */}
       <div className="flex justify-between mt-1">
-        <span className="text-xs text-gray-400">${MIN}</span>
-        <span className="text-xs text-gray-400">${MAX}</span>
+        <span className="text-xs text-[#141414]">${MIN}</span>
+        <span className="text-xs text-[#141414]">${MAX}</span>
       </div>
     </div>
   );
