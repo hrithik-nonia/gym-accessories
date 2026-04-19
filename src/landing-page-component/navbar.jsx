@@ -4,9 +4,11 @@ import Heading from "./heading";
 import { Link } from "react-scroll";
 import Login from "../landing-page-sub-component/login";
 import { useState } from "react";
+import Cart from "../landing-page-sub-component/cart";
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
   return (
     <>
@@ -83,7 +85,11 @@ const NavBar = () => {
             </li>
 
             <li>
-              <a href="#" className="text-[#141414] flex gap-2">
+              <a
+                href="#"
+                className="text-[#141414] flex gap-2"
+                onClick={() => setShowCart(true)}
+              >
                 <span className="flex items-center justify-center">
                   <CiShoppingCart size={"25px"} />
                 </span>
@@ -107,6 +113,9 @@ const NavBar = () => {
 
       {/* ----------show login page---------- */}
       {showLogin && <Login onClose={() => setShowLogin(false)}></Login>}
+
+      {/* ----------show cart page------------- */}
+      {showCart && <Cart onClose={() => setShowCart(false)}></Cart>}
     </>
   );
 };
