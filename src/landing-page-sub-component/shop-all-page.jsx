@@ -2,6 +2,7 @@ import { PiCaretRightLight } from "react-icons/pi";
 import PriceRangeSlider from "./price-range-slider";
 import shopSectionBanner from "../assets/shop_now_banner.avif";
 import Dropdown from "./dropdown-of-shop-all";
+import Card from "../landing-page-component/card";
 
 const ShopAllPage = () => {
   return (
@@ -84,6 +85,11 @@ const ShopAllPage = () => {
 
               {/* ----------dropdown------------- */}
               <Dropdown></Dropdown>
+            </div>
+
+            {/* ---------product cards------------- */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-3">
+              <Card></Card>
             </div>
           </div>
         </div>
