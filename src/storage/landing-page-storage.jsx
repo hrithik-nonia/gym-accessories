@@ -2,12 +2,8 @@ import { createContext } from "react";
 
 export const AppContext = createContext();
 
-const LandingPageStore = () => {
-  return (
-    <>
-      <h1>storage</h1>
-    </>
-  );
+const LandingPageStore = ({ children }) => {
+  return <AppContext.Provider>{children}</AppContext.Provider>;
 };
 
 export default LandingPageStore;

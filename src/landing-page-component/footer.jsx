@@ -7,7 +7,7 @@ const Footer = () => {
     <>
       <div
         className=" py-15 md:py-25  grid grid-cols-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 "
-        id="contect"
+        id="contact"
       >
         <p>
           <a

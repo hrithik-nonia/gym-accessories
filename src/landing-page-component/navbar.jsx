@@ -2,8 +2,12 @@ import { RxAvatar } from "react-icons/rx";
 import { CiShoppingCart } from "react-icons/ci";
 import Heading from "./heading";
 import { Link } from "react-scroll";
+import Login from "../landing-page-sub-component/login";
+import { useState } from "react";
 
 const NavBar = () => {
+  const [showLogin, setShowLogin] = useState(false);
+
   return (
     <>
       {/* ---------add heading-------- */}
@@ -57,9 +61,8 @@ const NavBar = () => {
             {/* --------contect btn---------- */}
             <li>
               <Link
-                href="#"
-                className="text-[#141414]"
-                to="contect"
+                className="text-[#141414] cursor-pointer"
+                to="contact"
                 smooth={true}
                 duration={1500}
               >
@@ -67,13 +70,18 @@ const NavBar = () => {
               </Link>
             </li>
             <li>
-              <a href="#" className="text-[#141414] flex gap-2">
+              <a
+                href="#"
+                className="text-[#141414] flex gap-2 cursor-pointer"
+                onClick={() => setShowLogin(true)}
+              >
                 <span className="flex items-center justify-center">
                   <RxAvatar size={"25px"} />
                 </span>
                 <span>Log In</span>
               </a>
             </li>
+
             <li>
               <a href="#" className="text-[#141414] flex gap-2">
                 <span className="flex items-center justify-center">
@@ -96,6 +104,9 @@ const NavBar = () => {
           </div>
         </div>
       </div>
+
+      {/* ----------show login page---------- */}
+      {showLogin && <Login onClose={() => setShowLogin(false)}></Login>}
     </>
   );
 };
