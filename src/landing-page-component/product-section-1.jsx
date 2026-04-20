@@ -1,8 +1,16 @@
 import Card from "./card";
-import { CiCircleChevLeft } from "react-icons/ci";
-import { CiCircleChevRight } from "react-icons/ci";
-import { useRef } from "react";
+import { CiCircleChevLeft, CiCircleChevRight } from "react-icons/ci";
+import { useRef, useContext } from "react";
+import { AppContext } from "../storage/landing-page-storage";
+
 const ProductSectionOne = () => {
+  // ------------take card data-----------
+  const { cards } = useContext(AppContext);
+
+  // ---------men's data -----------
+  const mensCards = cards.filter((cart) => cart.category === "men's clothing");
+
+  // ----------this is for horizontal scroll------------
   const scrollRef = useRef(null);
 
   const scrollLeft = () => {
@@ -34,7 +42,7 @@ const ProductSectionOne = () => {
             className=" flex gap-4 p-2 overflow-x-auto scroll-smooth"
             style={{ scrollbarWidth: "none" }}
           >
-            <Card></Card>
+            <Card data={mensCards}></Card>
           </div>
           <button className="text-[#141414] " onClick={scrollRight}>
             <CiCircleChevRight size={"40px"} />

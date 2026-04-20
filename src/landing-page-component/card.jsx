@@ -1,30 +1,9 @@
-import { useContext, useRef, useEffect, useState } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
-import { AppContext } from "../storage/landing-page-storage";
 
-const Card = () => {
-  // ------------scroll loading effect-----------
-  const { cards } = useContext(AppContext);
-  const loaderRef = useRef(null);
-  const [visible, setVisible] = useState(4);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        setVisible((prev) => prev + 4);
-      }
-    });
-
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
+const Card = ({ data = [] }) => {
   return (
     <>
-      {cards.slice(0, visible).map((cart) => (
+      {data.map((cart) => (
         <div
           className=" min-w-[250px] md:min-w-[304px] p-3 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition duration-300 cursor-pointer relative"
           key={cart.id}
@@ -64,8 +43,6 @@ const Card = () => {
           </div>
         </div>
       ))}
-
-      <div ref={loaderRef} className="h-10"></div>
     </>
   );
 };
