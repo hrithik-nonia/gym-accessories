@@ -1,4 +1,8 @@
+import { useContext } from "react";
+import { AppContext } from "../storage/landing-page-storage";
+
 const Cart = ({ onClose }) => {
+  const { cartItems } = useContext(AppContext);
   return (
     <>
       <div
@@ -26,7 +30,20 @@ const Cart = ({ onClose }) => {
 
         {/* Content */}
         <div className="p-4">
-          <p>Popup content here...</p>
+          <div className="p-4 space-y-4">
+            {/* ----------cart product here----------- */}
+            <p className="font-light">({cartItems.length} items)</p>
+            {cartItems.map((item) => (
+              <div key={item.id} className="flex gap-3 border-b pb-2">
+                <img src={item.image} className="w-12 h-12 object-cover" />
+                <div>
+                  <p className="text-sm">{item.title}</p>
+                  <p className="text-sm">Qty: {item.qty}</p>
+                  <p className="text-sm">₹ {item.price * item.qty}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
