@@ -32,9 +32,16 @@ const LandingPageStore = ({ children }) => {
   };
   // -------------for cart open------------
   const [showCart, setShowCart] = useState(false);
+
   return (
     <AppContext.Provider
-      value={{ cards, cartItems, addToCart, showCart, setShowCart }}
+      value={{
+        cards,
+        cartItems,
+        addToCart,
+        showCart,
+        setShowCart,
+      }}
     >
       {children}
     </AppContext.Provider>

@@ -9,7 +9,7 @@ import { AppContext } from "../storage/landing-page-storage";
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
-  const { showCart, setShowCart } = useContext(AppContext);
+  const { showCart, setShowCart, cartItems } = useContext(AppContext);
 
   return (
     <>
@@ -93,6 +93,11 @@ const NavBar = () => {
               >
                 <span className="flex items-center justify-center">
                   <CiShoppingCart size={"25px"} />
+                  {cartItems.length > 0 && (
+                    <span className="absolute top-11 right-18 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                      {cartItems.length}
+                    </span>
+                  )}
                 </span>
                 <span> Cart</span>
               </a>

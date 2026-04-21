@@ -54,7 +54,7 @@ const CardItem = ({ cart }) => {
             if (quantity > 0) {
               addToCart(cart, quantity);
               setShowCart(true); // ✅ yeh add karo
-              setQuantity(0);
+              setQuantity(1);
             }
           }}
         >
