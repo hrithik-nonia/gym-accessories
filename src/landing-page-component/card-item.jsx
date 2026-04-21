@@ -53,6 +53,7 @@ const CardItem = ({ cart }) => {
           onClick={() => {
             if (quantity > 0) {
               addToCart(cart, quantity);
+              setQuantity(0);
             }
           }}
         >

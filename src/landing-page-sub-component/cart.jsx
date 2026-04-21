@@ -1,8 +1,14 @@
 import { useContext } from "react";
 import { AppContext } from "../storage/landing-page-storage";
+import { LiaRupeeSignSolid } from "react-icons/lia";
+import { MdDelete } from "react-icons/md";
 
 const Cart = ({ onClose }) => {
   const { cartItems } = useContext(AppContext);
+  const totalAmount = cartItems
+    .reduce((total, item) => total + item.price * item.qty, 0)
+    .toFixed(2);
+
   return (
     <>
       <div
@@ -20,7 +26,7 @@ const Cart = ({ onClose }) => {
         <div className="flex justify-between items-center p-4 border-b">
           <div className="flex gap-3 items-center text-[#141414]">
             <h2 className="text-lg font-bold ">Cart</h2>
-            <p className="font-light">(0 items)</p>
+            <p className="font-light">({cartItems.length} items)</p>
           </div>
 
           <button onClick={onClose} className="cursor-pointer">
@@ -28,21 +34,54 @@ const Cart = ({ onClose }) => {
           </button>
         </div>
 
-        {/* Content */}
-        <div className="p-4">
-          <div className="p-4 space-y-4">
-            {/* ----------cart product here----------- */}
-            <p className="font-light">({cartItems.length} items)</p>
-            {cartItems.map((item) => (
-              <div key={item.id} className="flex gap-3 border-b pb-2">
-                <img src={item.image} className="w-12 h-12 object-cover" />
+        {/* ----------Content------------ */}
+        <div className="p-5 h-[calc(100%-70px)] overflow-y-auto">
+          {/* --------product here----------- */}
+          {cartItems.map((item) => (
+            <div>
+              <div className=" flex mb-3 ">
+                <div className=" w-1/5 aspect-square  cursor-pointer">
+                  <img
+                    src={item.image}
+                    className="w-full h-full object-cover "
+                  />
+                </div>
+                <div className="flex-1 px-4">
+                  <p className="text-sm font-light cursor-pointer">
+                    {item.title}
+                  </p>
+                  <p className="text-sm font-light mt-2 ">₹ {item.price}</p>
+                  <div className="flex items-center">
+                    <p className="text-sm font-light mt-1">Qty: {item.qty}</p>
+                    <p className="text-sm font-light ms-auto">
+                      ₹ {item.price * item.qty}
+                    </p>
+                  </div>
+                </div>
                 <div>
-                  <p className="text-sm">{item.title}</p>
-                  <p className="text-sm">Qty: {item.qty}</p>
-                  <p className="text-sm">₹ {item.price * item.qty}</p>
+                  <MdDelete size={"30px"} className="cursor-pointer" />
                 </div>
               </div>
-            ))}
+              <hr className="mb-3" />
+            </div>
+          ))}
+
+          <hr />
+          <div className="p-5 ">
+            <div className="flex justify-between font-light text-xl mb-2">
+              <h3>Estimated total</h3>
+              <span>₹ {totalAmount}</span>
+            </div>
+            <span className="text-[14px] font-light">
+              Taxes and shipping are calculated at checkout.
+            </span>
+            <button className="font-light rounded-lg bg-[#141414] text-[#fffcfc] w-full py-2 mt-5 hover:bg-gray-400 hover:underline  transition duration-400 ">
+              Checkout
+            </button>
+            <br />
+            <button className="font-light hover:underline rounded-lg border text-[#141414] w-full py-2 mt-5 hover:bg-gray-200  transition duration-400 ">
+              View Cart
+            </button>
           </div>
         </div>
       </div>
