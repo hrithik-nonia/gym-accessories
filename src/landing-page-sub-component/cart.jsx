@@ -38,7 +38,7 @@ const Cart = ({ onClose }) => {
         <div className="p-5 h-[calc(100%-70px)] overflow-y-auto">
           {/* --------product here----------- */}
           {cartItems.map((item) => (
-            <div>
+            <div key={item.id}>
               <div className=" flex mb-3 ">
                 <div className=" w-1/5 aspect-square  cursor-pointer">
                   <img

@@ -4,7 +4,7 @@ import { useRef, useContext } from "react";
 import { AppContext } from "../storage/landing-page-storage";
 
 const ProductSectionOne = () => {
-  // ------------take card data-----------
+  // ------------take card data------------
   const { cards } = useContext(AppContext);
 
   // ---------men's data -----------

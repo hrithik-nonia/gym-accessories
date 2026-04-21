@@ -28,6 +28,7 @@ const LandingPageStore = ({ children }) => {
       }
     });
   };
+
   return (
     <AppContext.Provider value={{ cards, cartItems, addToCart }}>
       {children}

@@ -3,8 +3,11 @@ import PriceRangeSlider from "./price-range-slider";
 import shopSectionBanner from "../assets/shop_now_banner.avif";
 import Card from "../landing-page-component/card";
 import MobileFilterMenu from "./burger-menu-for-shop-all-comp";
+import { useContext } from "react";
+import { AppContext } from "../storage/landing-page-storage";
 
 const ShopAllPage = () => {
+  const { cards } = useContext(AppContext);
   return (
     <>
       <div className="px-0 md:px-20">
@@ -82,7 +85,7 @@ const ShopAllPage = () => {
 
             {/* ---------product cards------------- */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-3 px-3 mdd:px-0">
-              <Card></Card>
+              <Card data={cards}></Card>
             </div>
           </div>
         </div>
