@@ -4,7 +4,7 @@ import { AppContext } from "../storage/landing-page-storage";
 
 // ✅ alag component — har card ka apna state hoga
 const CardItem = ({ cart }) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const { addToCart, setShowCart } = useContext(AppContext);
 
   return (
@@ -30,7 +30,7 @@ const CardItem = ({ cart }) => {
           <button
             className="cursor-pointer"
             onClick={() => {
-              setQuantity((prev) => Math.max(0, prev - 1));
+              setQuantity((prev) => Math.max(1, prev - 1));
             }}
           >
             <CiCircleMinus size={"30px"} />
@@ -53,7 +53,7 @@ const CardItem = ({ cart }) => {
           onClick={() => {
             if (quantity > 0) {
               addToCart(cart, quantity);
-              setShowCart(true);
+              setShowCart(true); // ✅ yeh add karo
               setQuantity(0);
             }
           }}

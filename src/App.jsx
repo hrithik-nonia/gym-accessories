@@ -8,8 +8,8 @@ import LandingPageStore from "./storage/landing-page-storage";
 function App() {
   return (
     <>
-      <LandingPageStore>
-        <BrowserRouter>
+      <BrowserRouter>
+        <LandingPageStore>
           {/* ---------navbar add--------- */}
           <NavBar />
           <Routes>
@@ -19,8 +19,8 @@ function App() {
 
           {/* --------footer------------ */}
           <Footer />
-        </BrowserRouter>
-      </LandingPageStore>
+        </LandingPageStore>
+      </BrowserRouter>
     </>
   );
 }

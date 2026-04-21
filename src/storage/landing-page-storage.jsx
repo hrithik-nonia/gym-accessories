@@ -16,7 +16,9 @@ const LandingPageStore = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product, qty) => {
+    console.log("addToCart called:", product.title, qty);
     setCartItems((prev) => {
+      console.log("prev cartItems:", prev);
       const existing = prev.find((item) => item.id === product.id);
 
       if (existing) {

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const HeroSection = () => {
   return (
     <>
@@ -6,12 +7,12 @@ const HeroSection = () => {
           <p className="text-[#fffcfc] text-3xl sm:text-4xl md:text-5xl lg:text-[62px] font-semibold leading-tight lg:leading-[68px] mb-10">
             Your Essentials for a Perfect Home Workout
           </p>
-          <a
-            href="/shopNowPage"
+          <Link
+            to="/shopNowPage"
             className="bg-[#a9977b] text-[#141414] rounded-xl px-6 py-3 text-sm hover:bg-[#8c7a60] hover:scale-105 transition duration-300  "
           >
             Shop Now
-          </a>
+          </Link>
         </div>
       </div>
     </>
