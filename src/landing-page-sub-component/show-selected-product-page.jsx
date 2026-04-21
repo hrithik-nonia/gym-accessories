@@ -1,38 +1,13 @@
-import { useRef, useState } from "react";
-import { CiHeart } from "react-icons/ci";
-
-const products = [
-  {
-    id: 1,
-    title: "Product 1",
-    price: 29.99,
-    image: "https://fakestoreapi.com/img/81fAn1tQGsL._AC_UY879_.jpg",
-  },
-  {
-    id: 2,
-    title: "Product 2",
-    price: 49.99,
-    image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-  },
-  {
-    id: 3,
-    title: "Product 3",
-    price: 19.99,
-    image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-  },
-  {
-    id: 4,
-    title: "Product 4",
-    price: 39.99,
-    image: "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
-  },
-  {
-    id: 5,
-    title: "Product 5",
-    price: 59.99,
-    image: "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
-  },
-];
+import { useState } from "react";
+import {
+  CiHeart,
+  CiFacebook,
+  CiCircleMinus,
+  CiCirclePlus,
+} from "react-icons/ci";
+import { FaPinterest, FaWhatsapp } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import HorizontalScroll from "./scroll-able-product-section-2";
 
 const ShowSelectedProductPage = () => {
   // ----------for information list----------
@@ -56,18 +31,6 @@ const ShowSelectedProductPage = () => {
   ];
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
-  };
-
-  // --------------for scroll product-----------
-  const scrollRef = useRef(null);
-  const CARD_WIDTH = 210 + 16; // card + gap
-
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -CARD_WIDTH, behavior: "smooth" });
-  };
-
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: CARD_WIDTH, behavior: "smooth" });
   };
 
   return (
@@ -97,7 +60,19 @@ const ShowSelectedProductPage = () => {
               <p className="font-light text-[20px] mt-5">
                 $30.00 Regular Price$20.00
               </p>
-              <p className="font-light text-[20px] mt-3">Quantity*2</p>
+
+              {/* ----------product quantity---------- */}
+              <div className=" mt-5  flex items-center justify-between  gap-2 w-[20px]">
+                <button className="cursor-pointer">
+                  <CiCircleMinus size={"30px"} />
+                </button>
+
+                <span className=" text-center">0</span>
+
+                <button className="cursor-pointer">
+                  <CiCirclePlus size={"30px"} />
+                </button>
+              </div>
 
               <div className="flex gap-2 px-5 mt-5">
                 <button className="font-light bg-[#141414] text-[#fffcfc] flex-1 py-2 rounded-lg hover:bg-gray-400 hover:text-[#141414] transition-colors duration-300 ease-in-out cursor-pointer">
@@ -141,69 +116,28 @@ const ShowSelectedProductPage = () => {
                   </div>
                 ))}
               </div>
+
+              {/* -------social media links--------- */}
+              <div className="flex pt-8 gap-6">
+                <a href="#">
+                  <CiFacebook size={"25px"} />
+                </a>
+                <a href="#">
+                  <FaPinterest size={"25px"} />
+                </a>
+                <a href="#">
+                  <FaWhatsapp size={"25px"} />
+                </a>
+                <a href="#">
+                  <FaSquareXTwitter size={"25px"} />
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* .................................... */}
-
-      <div className="px-4 py-6">
-        {/* ----------scroll container with buttons---------- */}
-        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
-          {/* -----left button----- */}
-          <button
-            onClick={scrollLeft}
-            className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
-          >
-            ‹
-          </button>
-
-          {/* -----scrollable cards----- */}
-          <div
-            ref={scrollRef}
-            className="flex gap-4 overflow-x-auto scroll-smooth"
-            style={{ scrollbarWidth: "none" }}
-          >
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="flex-shrink-0 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition duration-300 overflow-hidden"
-                style={{ width: "210px" }}
-              >
-                {/* ----image---- */}
-                <div style={{ width: "210px", height: "210px" }}>
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* ----info---- */}
-                <div className="p-3">
-                  <p className="text-sm font-light text-[#141414] line-clamp-2">
-                    {product.title}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    ₹ {product.price}
-                  </p>
-                  <button className="mt-2 w-full border rounded-lg py-1.5 text-sm font-light hover:bg-[#141414] hover:text-white transition duration-300">
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* -----right button----- */}
-          <button
-            onClick={scrollRight}
-            className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
-          >
-            ›
-          </button>
-        </div>
+        {/* --------------scrolla able cards------------- */}
+        <HorizontalScroll></HorizontalScroll>
       </div>
     </>
   );
