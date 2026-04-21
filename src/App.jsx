@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ShopAllPage from "./landing-page-sub-component/shop-all-page";
 import Footer from "./landing-page-component/footer";
 import LandingPageStore from "./storage/landing-page-storage";
+import ShowSelectedProductPage from "./landing-page-sub-component/show-selected-product-page";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
           <Routes>
             <Route path="/" element={<MainSection />} />
             <Route path="/shopNowPage" element={<ShopAllPage />} />
+            <Route
+              path="/ShowSelectedProductPage"
+              element={<ShowSelectedProductPage />}
+            />
           </Routes>
 
           {/* --------footer------------ */}
