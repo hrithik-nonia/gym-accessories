@@ -3,12 +3,13 @@ import { CiShoppingCart } from "react-icons/ci";
 import Heading from "./heading";
 import { Link } from "react-scroll";
 import Login from "../landing-page-sub-component/login";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Cart from "../landing-page-sub-component/cart";
+import { AppContext } from "../storage/landing-page-storage";
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
-  const [showCart, setShowCart] = useState(false);
+  const { showCart, setShowCart } = useContext(AppContext);
 
   return (
     <>
@@ -115,7 +116,7 @@ const NavBar = () => {
       {showLogin && <Login onClose={() => setShowLogin(false)}></Login>}
 
       {/* ----------show cart page------------- */}
-      {showCart && <Cart onClose={() => setShowCart(false)}></Cart>}
+      {showCart && <Cart onClose={() => setShowCart(false)} />}
     </>
   );
 };

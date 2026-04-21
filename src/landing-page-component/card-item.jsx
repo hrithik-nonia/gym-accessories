@@ -5,7 +5,7 @@ import { AppContext } from "../storage/landing-page-storage";
 // ✅ alag component — har card ka apna state hoga
 const CardItem = ({ cart }) => {
   const [quantity, setQuantity] = useState(0);
-  const { addToCart } = useContext(AppContext);
+  const { addToCart, setShowCart } = useContext(AppContext);
 
   return (
     <div
@@ -53,6 +53,7 @@ const CardItem = ({ cart }) => {
           onClick={() => {
             if (quantity > 0) {
               addToCart(cart, quantity);
+              setShowCart(true);
               setQuantity(0);
             }
           }}
