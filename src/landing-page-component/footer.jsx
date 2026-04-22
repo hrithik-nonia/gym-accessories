@@ -1,6 +1,7 @@
 import { CiFacebook } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
 import { AiOutlineYoutube } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -13,6 +14,33 @@ const Footer = () => {
           <a
             href="#"
             className="text-[#142026] text-[25px] font-bold flex justify-center"
+            onClick={(e) => {
+              e.preventDefault();
+              const start = window.scrollY;
+
+              const duration = 2000; // 2 seconds
+              const startTime = performance.now();
+
+              const scroll = (currentTime) => {
+                const elapsed = currentTime - startTime;
+
+                const progress = Math.min(elapsed / duration, 1);
+
+                // easeInOutCubic — super smooth feel
+                const ease =
+                  progress < 0.5
+                    ? 4 * progress * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+                window.scrollTo(0, start * (1 - ease));
+
+                if (progress < 1) {
+                  requestAnimationFrame(scroll);
+                }
+              };
+
+              requestAnimationFrame(scroll);
+            }}
           >
             GYM
             <span className="text-red-500 ml-1">X.</span>
@@ -21,12 +49,12 @@ const Footer = () => {
         <div className=" px-10 ">
           <h2 className="mb-6 font-bold text-center md:text-left">Store</h2>
           <p className="font-light text-center md:text-left">
-            <a href="#">Shop</a> <br />
-            <a href="#">Shipping & Returns</a>
+            <Link to="/shopNowPage">Shop</Link> <br />
+            <Link to="/shipping">Shipping & Returns</Link>
             <br />
-            <a href="#">Store Policy</a>
+            <Link to="/store-policy">Store Policy</Link>
             <br />
-            <a href="#">FAQ</a>
+            <Link to="/faq">FAQ</Link>
           </p>
         </div>
 
