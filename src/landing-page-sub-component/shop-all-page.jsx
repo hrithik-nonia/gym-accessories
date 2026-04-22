@@ -5,9 +5,26 @@ import Card from "../landing-page-component/card";
 import MobileFilterMenu from "./burger-menu-for-shop-all-comp";
 import { useContext } from "react";
 import { AppContext } from "../storage/landing-page-storage";
+import { useLocation } from "react-router-dom";
 
 const ShopAllPage = () => {
   const { cards } = useContext(AppContext);
+  const location = useLocation();
+
+  // -----------state receiving------------
+  const category = location.state?.category || "All Products";
+  const image = location.state?.img || shopSectionBanner;
+
+  // Category ke hisaab se description
+  const descriptions = {
+    "Yoga & Pilates":
+      "Yoga aur Pilates ke liye best products. Apni flexibility aur strength badhao.",
+    "Fitness Accessories":
+      "Fitness accessories jo aapki workout ko next level le jaaye.",
+    "Weight Training": "Weight training ke liye premium equipment aur gear.",
+    "All Products":
+      "This is your category description. It's a great place to tell customers what this category is about.",
+  };
   return (
     <>
       <div className="px-0 md:px-20">
@@ -62,20 +79,18 @@ const ShopAllPage = () => {
             <div className="md:pb-10 pb-4">
               {/* -------------banner img add ---------- */}
               <img
-                src={shopSectionBanner}
+                src={image}
                 alt="shopSectionBanner"
-                className="w-full md:h-full h-[300px] object-cover"
+                className="w-full h-[300px] md:h-[500px] object-cover"
               />
 
               {/* --------------bannre text------------ */}
               <div className="px-3 md:px-0">
                 <h1 className="text-[#141414] md:text-6xl text-3xl font-bold md:mt-8 mt-4">
-                  All Products
+                  {category}
                 </h1>
                 <div className="md:w-[700px] w-full mt-6 font-light">
-                  This is your category description. It’s a great place to tell
-                  customers what this category is about, connect with your
-                  audience and draw attention to your products.
+                  {descriptions[category]}
                 </div>
               </div>
             </div>

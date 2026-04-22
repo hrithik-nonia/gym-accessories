@@ -79,7 +79,7 @@ export default function HorizontalScroll() {
         <div className="flex items-center justify-between mb-5 max-w-4xl mx-auto w-full">
           <div>
             <h1 className="text-xl font-semibold text-gray-900">
-              Destinations
+              Related Products
             </h1>
             <p className="text-sm text-gray-400 mt-0.5">Scroll to explore</p>
           </div>
