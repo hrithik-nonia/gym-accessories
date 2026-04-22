@@ -6,14 +6,18 @@ import { Link } from "react-router-dom";
 // ✅ alag component — har card ka apna state hoga
 const CardItem = ({ cart }) => {
   const [quantity, setQuantity] = useState(1);
-  const { addToCart, setShowCart } = useContext(AppContext);
+  const { addToCart, setShowCart, setSelectedProductId } =
+    useContext(AppContext);
 
   return (
     <div
       className="min-w-[250px] md:min-w-[304px] p-3 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition duration-300 cursor-pointer relative"
       key={cart.id}
     >
-      <Link to="ShowSelectedProductPage">
+      <Link
+        to="ShowSelectedProductPage"
+        onClick={() => setSelectedProductId(cart.id)}
+      >
         <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-xl absolute top-0 left-0">
           {`rate: ${cart.rating.rate}`}
         </span>
@@ -27,7 +31,10 @@ const CardItem = ({ cart }) => {
       </Link>
 
       <div className="p-4">
-        <Link to="ShowSelectedProductPage">
+        <Link
+          to="ShowSelectedProductPage"
+          onClick={() => setSelectedProductId(cart.id)}
+        >
           <h2 className="text-lg font-light text-[#141414]">{cart.title}</h2>
           <p className="text-gray-500 text-lg">{cart.price}</p>
         </Link>

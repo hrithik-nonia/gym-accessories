@@ -33,6 +33,15 @@ const LandingPageStore = ({ children }) => {
   // -------------for cart open------------
   const [showCart, setShowCart] = useState(false);
 
+  // --------------selected product id to show in show-selected-product-page----------------
+  const [selectedProductId, setSelectedProductId] = useState(() => {
+    return localStorage.getItem("selectedProductId") || 0;
+  });
+
+  // Aur ek useEffect add karo jo har change par save kare
+  useEffect(() => {
+    localStorage.setItem("selectedProductId", selectedProductId);
+  }, [selectedProductId]);
   return (
     <AppContext.Provider
       value={{
@@ -41,6 +50,8 @@ const LandingPageStore = ({ children }) => {
         addToCart,
         showCart,
         setShowCart,
+        selectedProductId,
+        setSelectedProductId,
       }}
     >
       {children}
