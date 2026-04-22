@@ -42,6 +42,7 @@ const LandingPageStore = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("selectedProductId", selectedProductId);
   }, [selectedProductId]);
+
   return (
     <AppContext.Provider
       value={{

@@ -1,6 +1,9 @@
+import { useState } from "react";
 import formImg from "../assets/form_img.avif";
+import FormVreificationPopup from "../landing-page-sub-component/form-section-verification-popup";
 
 const FormSection = () => {
+  const [showVerificationPopup, setShowVerificationPopup] = useState(false);
   return (
     <>
       <div
@@ -21,7 +24,13 @@ const FormSection = () => {
 
           {/* ---------form--------- */}
 
-          <form className="mx-4 md:mx-auto max-w-md mt-10 mb-25">
+          <form
+            className="mx-4 md:mx-auto max-w-md mt-10 mb-25"
+            onSubmit={(e) => {
+              e.preventDefault(); // ✅ page refresh rokta hai
+              setShowVerificationPopup(true);
+            }}
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
               {/* --------first name---------- */}
               <div>
@@ -79,6 +88,13 @@ const FormSection = () => {
           </form>
         </div>
       </div>
+
+      {/* --------------show verification popup------------ */}
+      {showVerificationPopup && (
+        <FormVreificationPopup
+          onClose={() => setShowVerificationPopup(false)}
+        />
+      )}
     </>
   );
 };
