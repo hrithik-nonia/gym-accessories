@@ -4,7 +4,7 @@ import HeadingForLandPageComp from "./heading-for-landing-page-components";
 const ProductSectionTwo = () => {
   return (
     <>
-      <div className="bg-[#142026]">
+      <div className="bg-[#142026] px-3 md:px-0">
         <HeadingForLandPageComp
           title="Shop by Collection"
           subtitle="I'm a title. Click here to add your own text and edit me."

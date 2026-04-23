@@ -4,7 +4,7 @@ const EndSection = () => {
   return (
     <>
       <div className="bg-[#a9977b] py-16 ">
-        <div className="w-1/2 mx-auto">
+        <div className="md:w-1/2 w-full md:mx-auto px-4 md:px-0">
           <HeadingForLandPageComp
             title="The Best Equipment for Meeting Your Goals"
             subtitle="I'm a title. Click here to add your own text and edit me."
