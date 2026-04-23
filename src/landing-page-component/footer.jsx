@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <>
       <div
-        className=" py-15 md:py-25  grid grid-cols-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 "
+        className=" py-15 md:py-25   grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 "
         id="contact"
       >
         <p>
@@ -73,14 +73,14 @@ const Footer = () => {
         <div className=" px-10 ">
           <h2 className="mb-6 font-bold text-center md:text-left">Follow Us</h2>
           <p className="flex gap-4 justify-center md:justify-start">
-            <a href="#">
+            <a href="https://www.facebook.com/">
               <CiFacebook size={"20px"} />
             </a>
-            <a href="#">
+            <a href="https://www.instagram.com/">
               <FaInstagram size={"20px"} />
             </a>
 
-            <a href="#">
+            <a href="https://www.youtube.com/">
               <AiOutlineYoutube size={"20px"} />
             </a>
           </p>
@@ -88,7 +88,13 @@ const Footer = () => {
       </div>
       <div className="bg-[#a9977b] ">
         <p className="text-[#141414] text-sm text-center py-2 font-light">
-          © 2035 by GYM X.
+          © 2035 by{" "}
+          <span
+            className="cursor-pointer underline hover:font-normal  transition duration-300"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            GYM X.
+          </span>
         </p>
       </div>
     </>

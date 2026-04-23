@@ -43,6 +43,31 @@ const LandingPageStore = ({ children }) => {
     localStorage.setItem("selectedProductId", selectedProductId);
   }, [selectedProductId]);
 
+  // -------------scroll to top--------------
+  const scrollToTop = (duration = 2000) => {
+    const start = window.scrollY;
+    const startTime = performance.now();
+
+    const scroll = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // easeInOut (smooth feel)
+      const ease =
+        progress < 0.5
+          ? 2 * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+      window.scrollTo(0, start * (1 - ease));
+
+      if (progress < 1) {
+        requestAnimationFrame(scroll);
+      }
+    };
+
+    requestAnimationFrame(scroll);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -53,6 +78,7 @@ const LandingPageStore = ({ children }) => {
         setShowCart,
         selectedProductId,
         setSelectedProductId,
+        scrollToTop,
       }}
     >
       {children}

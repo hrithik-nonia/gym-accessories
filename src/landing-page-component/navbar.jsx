@@ -9,7 +9,8 @@ import { AppContext } from "../storage/landing-page-storage";
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
-  const { showCart, setShowCart, cartItems } = useContext(AppContext);
+  const { showCart, setShowCart, cartItems, scrollToTop } =
+    useContext(AppContext);
 
   return (
     <>
@@ -19,27 +20,33 @@ const NavBar = () => {
       <div className="bg-[#fffcfc] flex items-center h-17 border">
         {/* -------logo container ------------ */}
         <div className="bg-[#1f2126] lg:w-1/5 py-4 text-center px-2 w-full h-full">
-          <a href="#" className="text-[#fffcfc] text-[25px] font-bold ">
+          <button
+            className="text-[#fffcfc] text-[25px] font-bold cursor-pointer "
+            onClick={() => scrollToTop(1500)}
+          >
             GYM
             <span className="text-red-500 ml-1">X.</span>
-          </a>
+          </button>
         </div>
 
         {/* ----------- links container for desktop--------------- */}
         <div className=" w-full lg:w-1/2 ml-auto py-4 h-full hidden lg:block">
           <ul className="flex gap-20 items-center justify-center h-full text-[14px]">
             <li>
-              <a href="#" className=" text-[#a9977b]">
+              <button
+                className=" text-[#a9977b] cursor-pointer"
+                onClick={() => scrollToTop(1500)}
+              >
                 Home
-              </a>
+              </button>
             </li>
 
             {/* --------shop all btn--------- */}
             <li className="relative group">
-              <a href="#" className="text-[#141414]">
+              <button className="text-[#141414] cursor-pointer">
                 shop All
-              </a>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 bg-[#fffcfc] border border-gray-200 rounded-lg py-2 min-w-[170px] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50 translate-y-[-6px] group-hover:translate-y-0">
+              </button>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 bg-[#fffcfc] border border-gray-200 rounded-lg py-2 min-w-[170px] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 -translate-y-1.5 group-hover:translate-y-0 cursor-pointer">
                 <a
                   href="#"
                   className="block px-4 py-2 text-[13px] text-[#141414] hover:bg-gray-50 hover:text-[#a9977b]"
@@ -67,14 +74,13 @@ const NavBar = () => {
                 className="text-[#141414] cursor-pointer"
                 to="contact"
                 smooth={true}
-                duration={1500}
+                duration={2500}
               >
                 Contact
               </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <button
                 className="text-[#141414] flex gap-2 cursor-pointer"
                 onClick={() => setShowLogin(true)}
               >
@@ -82,13 +88,12 @@ const NavBar = () => {
                   <RxAvatar size={"25px"} />
                 </span>
                 <span>Log In</span>
-              </a>
+              </button>
             </li>
 
             <li>
-              <a
-                href="#"
-                className="text-[#141414] flex gap-2"
+              <button
+                className="text-[#141414] flex gap-2 cursor-pointer"
                 onClick={() => setShowCart(true)}
               >
                 <span className="flex items-center justify-center">
@@ -100,7 +105,7 @@ const NavBar = () => {
                   )}
                 </span>
                 <span> Cart</span>
-              </a>
+              </button>
             </li>
           </ul>
         </div>

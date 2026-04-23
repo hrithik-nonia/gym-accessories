@@ -7,7 +7,7 @@ const Heading = () => {
           <Link
             to="formSection" // 👈 yaha change
             smooth={true}
-            duration={1500}
+            duration={2500}
             className="mr-1 underline decoration-1 cursor-pointer"
           >
             Subscribe
