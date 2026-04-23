@@ -2,6 +2,7 @@ import Card from "./card";
 import { CiCircleChevLeft, CiCircleChevRight } from "react-icons/ci";
 import { useRef, useContext } from "react";
 import { AppContext } from "../storage/landing-page-storage";
+import HeadingForLandPageComp from "./heading-for-landing-page-components";
 
 const ProductSectionThree = () => {
   // ----------take card data-----------
@@ -26,12 +27,10 @@ const ProductSectionThree = () => {
   return (
     <>
       <div>
-        <h1 className="text-[#141414] text-[30px] sm:text-[44px]  font-bold text-center mt-16  font-serif">
-          Up to 20% off Selected Items
-        </h1>
-        <p className="text-center font-light text-[#141414] mt-3">
-          I'm a title. Click here to add your own text and edit me.
-        </p>
+        <HeadingForLandPageComp
+          title="Up to 20% off Selected Items"
+          subtitle="I'm a title. Click here to add your own text and edit me."
+        ></HeadingForLandPageComp>
 
         {/* -----------add card-------------- */}
         <div className=" md:m-15 grid grid-cols-[auto_1fr_auto] items-center gap-4 mx-0 my-10">

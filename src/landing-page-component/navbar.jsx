@@ -46,7 +46,7 @@ const NavBar = () => {
               <button className="text-[#141414] cursor-pointer">
                 shop All
               </button>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 bg-[#fffcfc] border border-gray-200 rounded-lg py-2 min-w-[170px] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 -translate-y-1.5 group-hover:translate-y-0 cursor-pointer">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 bg-[#fffcfc] border border-gray-200 rounded-lg py-2 min-w-42.5 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 -translate-y-1.5 group-hover:translate-y-0 cursor-pointer">
                 <a
                   href="#"
                   className="block px-4 py-2 text-[13px] text-[#141414] hover:bg-gray-50 hover:text-[#a9977b]"

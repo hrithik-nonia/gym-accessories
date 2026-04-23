@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
+import HeadingForLandPageComp from "./heading-for-landing-page-components";
 
 const ProductSectionTwo = () => {
   return (
     <>
       <div className="bg-[#142026]">
-        <h1 className="text-[#fffcfc] text-[30px] sm:text-[44px] font-serif font-bold text-center pt-16">
-          Shop by Collection
-        </h1>
-        <p className="text-[#fffcfc] text-center mt-3 font-light">
-          I'm a title. Click here to add your own text and edit me.
-        </p>
+        <HeadingForLandPageComp
+          title="Shop by Collection"
+          subtitle="I'm a title. Click here to add your own text and edit me."
+          isDark={true}
+        ></HeadingForLandPageComp>
 
         {/* ----------prodect section----------- */}
 

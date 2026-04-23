@@ -4,6 +4,32 @@ import FormVreificationPopup from "../landing-page-sub-component/form-section-ve
 
 const FormSection = () => {
   const [showVerificationPopup, setShowVerificationPopup] = useState(false);
+
+  // ------------form data here-------------
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = new FormData(e.target);
+
+    const formValues = Object.fromEntries(data.entries());
+
+    // ------------for check box----------
+    formValues.terms = data.get("terms") ? true : false;
+
+    // ✅ validation
+    if (
+      formValues.firstName &&
+      formValues.lastName &&
+      formValues.email &&
+      formValues.terms
+    ) {
+      setShowVerificationPopup(true);
+      e.target.reset();
+    } else {
+      alert("Please fill all fields and accept terms");
+    }
+  };
+
   return (
     <>
       <div
@@ -26,10 +52,7 @@ const FormSection = () => {
 
           <form
             className="mx-4 md:mx-auto max-w-md mt-10 mb-25"
-            onSubmit={(e) => {
-              e.preventDefault(); // ✅ page refresh rokta hai
-              setShowVerificationPopup(true);
-            }}
+            onSubmit={handleSubmit}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
               {/* --------first name---------- */}
@@ -39,6 +62,7 @@ const FormSection = () => {
                 </label>
                 <input
                   type="text"
+                  name="firstName"
                   className="w-full border border-gray-300 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-blue-400 text-[#fffcfc]"
                 />
               </div>
@@ -50,6 +74,7 @@ const FormSection = () => {
                 </label>
                 <input
                   type="text"
+                  name="lastName"
                   className="w-full border border-gray-300 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-blue-400 text-[#fffcfc]"
                 />
               </div>
@@ -63,6 +88,7 @@ const FormSection = () => {
               </label>
               <input
                 type="email"
+                name="email"
                 className="w-full border border-gray-300 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-blue-400 text-[#fffcfc]"
               />
             </div>
@@ -71,6 +97,7 @@ const FormSection = () => {
             <div className="flex items-center gap-2 mb-5">
               <input
                 type="checkbox"
+                name="terms"
                 className="w-4 h-4 bg-transparent border border-gray-400 appearance-none checked:bg-white"
               />
               <label className="text-sm text-[#fffcfc]">

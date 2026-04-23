@@ -10,10 +10,7 @@ const CardItem = ({ cart }) => {
     useContext(AppContext);
 
   return (
-    <div
-      className="min-w-[250px] md:min-w-[304px] p-3 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition duration-300 cursor-pointer relative"
-      key={cart.id}
-    >
+    <div className="min-w-[250px] md:min-w-[304px] p-3 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition duration-300 cursor-pointer relative flex flex-col">
       <Link
         to="ShowSelectedProductPage"
         onClick={() => setSelectedProductId(cart.id)}
@@ -30,7 +27,7 @@ const CardItem = ({ cart }) => {
         </div>
       </Link>
 
-      <div className="p-4">
+      <div className="p-4 flex flex-col grow">
         <Link
           to="ShowSelectedProductPage"
           onClick={() => setSelectedProductId(cart.id)}
@@ -39,40 +36,42 @@ const CardItem = ({ cart }) => {
           <p className="text-gray-500 text-lg">{cart.price}</p>
         </Link>
 
-        <div className="border mt-2 h-10 flex items-center justify-between px-2 gap-2 rounded-lg">
+        <div className="mt-auto">
+          <div className="border mt-auto h-10 flex items-center justify-between px-2 gap-2 rounded-lg ">
+            <button
+              className="cursor-pointer"
+              onClick={() => {
+                setQuantity((prev) => Math.max(1, prev - 1));
+              }}
+            >
+              <CiCircleMinus size={"30px"} />
+            </button>
+
+            <span className="w-12 text-center">{quantity}</span>
+
+            <button
+              className="cursor-pointer"
+              onClick={() => {
+                setQuantity((prev) => prev + 1);
+              }}
+            >
+              <CiCirclePlus size={"30px"} />
+            </button>
+          </div>
+
           <button
-            className="cursor-pointer"
+            className="border mt-3 rounded-lg w-full py-2 text-[#141414] font-light cursor-pointer hover:bg-[#141414] hover:text-[#fffcfc] transition duration-300"
             onClick={() => {
-              setQuantity((prev) => Math.max(1, prev - 1));
+              if (quantity > 0) {
+                addToCart(cart, quantity);
+                setShowCart(true); // ✅ yeh add karo
+                setQuantity(1);
+              }
             }}
           >
-            <CiCircleMinus size={"30px"} />
-          </button>
-
-          <span className="w-12 text-center">{quantity}</span>
-
-          <button
-            className="cursor-pointer"
-            onClick={() => {
-              setQuantity((prev) => prev + 1);
-            }}
-          >
-            <CiCirclePlus size={"30px"} />
+            Add To Cart
           </button>
         </div>
-
-        <button
-          className="border mt-3 rounded-lg w-full py-2 text-[#141414] font-light cursor-pointer hover:bg-[#141414] hover:text-[#fffcfc] transition duration-300"
-          onClick={() => {
-            if (quantity > 0) {
-              addToCart(cart, quantity);
-              setShowCart(true); // ✅ yeh add karo
-              setQuantity(1);
-            }
-          }}
-        >
-          Add To Cart
-        </button>
       </div>
     </div>
   );

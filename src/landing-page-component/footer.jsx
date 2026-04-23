@@ -2,8 +2,11 @@ import { CiFacebook } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
 import { AiOutlineYoutube } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { AppContext } from "../storage/landing-page-storage";
+import { useContext } from "react";
 
 const Footer = () => {
+  const { scrollToTop } = useContext(AppContext);
   return (
     <>
       <div
@@ -88,10 +91,10 @@ const Footer = () => {
       </div>
       <div className="bg-[#a9977b] ">
         <p className="text-[#141414] text-sm text-center py-2 font-light">
-          © 2035 by{" "}
+          © 2035 by
           <span
-            className="cursor-pointer underline hover:font-normal  transition duration-300"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="cursor-pointer underline hover:font-normal  transition duration-300 ps-1"
+            onClick={() => scrollToTop(2500)}
           >
             GYM X.
           </span>
