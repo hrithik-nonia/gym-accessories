@@ -25,9 +25,12 @@ const CheckOutPage = () => {
       {/* --------Top Navbar-------- */}
       <header className="border-b border-[#e0e0e0] px-10 py-4 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <span className="text-[20px] font-bold tracking-wider text-[#1a1a1a]">
+          <Link
+            to="/"
+            className="text-[20px] font-bold tracking-wider text-[#1a1a1a]"
+          >
             GYM <span className="text-red-500">X.</span>
-          </span>
+          </Link>
           <span className="text-[15px] font-light tracking-widest text-[#1a1a1a]">
             CHECKOUT
           </span>
@@ -60,12 +63,12 @@ const CheckOutPage = () => {
           {/* Header */}
           <div className="flex justify-between items-center mb-5">
             <h3 className="text-base font-medium text-[#1a1a1a] tracking-wide">
-              Order summary{" "}
+              Order summary
               <span className="font-light text-[#888] text-sm">
                 ({totalItems} items)
               </span>
             </h3>
-            <Link to="/">
+            <Link to="/ViewCartData">
               <FiEdit2
                 size={16}
                 className="text-[#888] hover:text-[#1a1a1a] transition cursor-pointer"

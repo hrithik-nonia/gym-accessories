@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import { AppContext } from "../storage/landing-page-storage";
 import { MdDelete } from "react-icons/md";
 import { FiTag, FiFileText, FiLock } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const ViewCartData = () => {
-  const { cartItems, setCartItems } = useContext(AppContext);
+  const { cartItems, setCartItems, setSelectedProductId } =
+    useContext(AppContext);
   const [promoOpen, setPromoOpen] = useState(false);
   const [noteOpen, setNoteOpen] = useState(false);
   const [promoCode, setPromoCode] = useState("");
@@ -28,7 +30,7 @@ const ViewCartData = () => {
 
   return (
     <>
-      <div className=" bg-[#f8f7f5] font-['Cormorant_Garamond',serif] py-10 px-4">
+      <div className=" bg-[#f8f7f5] font-['Cormorant_Garamond',serif] py-10 px-4 min-h-[500px]">
         <link
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&display=swap"
           rel="stylesheet"
@@ -51,19 +53,30 @@ const ViewCartData = () => {
                 <div key={item.id}>
                   <div className="flex items-center gap-5 py-5">
                     {/* Image */}
-                    <div className="w-[100px] h-[100px] bg-[#eeece8] flex-shrink-0 overflow-hidden">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-contain p-2"
-                      />
-                    </div>
+
+                    <Link
+                      to="/ShowSelectedProductPage"
+                      onClick={() => setSelectedProductId(item.id)}
+                    >
+                      <div className="w-[100px] h-[100px] bg-[#eeece8] flex-shrink-0 overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-contain p-2"
+                        />
+                      </div>
+                    </Link>
 
                     {/* Info */}
                     <div className="flex-1 min-w-0">
-                      <p className="text-[15px] font-['Jost',sans-serif] font-light text-[#1a1a1a] truncate">
-                        {item.title}
-                      </p>
+                      <Link
+                        to="/ShowSelectedProductPage"
+                        onClick={() => setSelectedProductId(item.id)}
+                      >
+                        <p className="text-[15px] font-['Jost',sans-serif] font-light text-[#1a1a1a] truncate">
+                          {item.title}
+                        </p>
+                      </Link>
                       <p className="text-sm font-['Jost',sans-serif] font-light text-[#888] mt-1">
                         ₹ {item.price}
                       </p>
@@ -114,7 +127,7 @@ const ViewCartData = () => {
               <div>
                 <button
                   onClick={() => setPromoOpen(!promoOpen)}
-                  className="flex items-center gap-2 text-sm font-['Jost',sans-serif] font-light text-[#1a1a1a] tracking-wide hover:opacity-70 transition"
+                  className="flex items-center gap-2 text-sm font-['Jost',sans-serif] font-light text-[#1a1a1a] tracking-wide hover:opacity-70 transition cursor-pointer"
                 >
                   <FiTag size={15} />
                   Enter a promo code
@@ -139,7 +152,7 @@ const ViewCartData = () => {
               <div>
                 <button
                   onClick={() => setNoteOpen(!noteOpen)}
-                  className="flex items-center gap-2 text-sm font-['Jost',sans-serif] font-light text-[#1a1a1a] tracking-wide hover:opacity-70 transition"
+                  className="flex items-center gap-2 text-sm font-['Jost',sans-serif] font-light text-[#1a1a1a] tracking-wide hover:opacity-70 transition cursor-pointer"
                 >
                   <FiFileText size={15} />
                   Add a note
@@ -192,9 +205,11 @@ const ViewCartData = () => {
               <span>₹ {subtotal}</span>
             </div>
 
-            <button className="w-full bg-[#1a1a1a] text-[#f8f7f5] py-3 text-sm font-['Jost',sans-serif] font-light tracking-widest hover:bg-[#333] transition duration-300">
-              Checkout
-            </button>
+            <Link to="/CheckOutPage">
+              <button className="w-full bg-[#1a1a1a] text-[#f8f7f5] py-3 text-sm font-['Jost',sans-serif] font-light tracking-widest hover:bg-[#333] transition duration-300">
+                Checkout
+              </button>
+            </Link>
 
             <div className="flex items-center justify-center gap-2 mt-3 text-[#888]">
               <FiLock size={13} />

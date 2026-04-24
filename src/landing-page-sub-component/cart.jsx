@@ -4,7 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const Cart = ({ onClose }) => {
-  const { cartItems, setSelectedProductId, setCartItems } =
+  const { cartItems, setSelectedProductId, setCartItems, setShowCart } =
     useContext(AppContext);
   const totalAmount = cartItems
     .reduce((total, item) => total + item.price * item.qty, 0)
@@ -46,7 +46,7 @@ const Cart = ({ onClose }) => {
         <div className="p-5 h-[calc(100%-70px)] overflow-y-auto">
           {/* --------product here----------- */}
           {cartItems.map((item) => (
-            <div key={item.id}>
+            <div key={item.id} className="py-2">
               <div className=" flex mb-3 ">
                 <div className=" w-1/5 aspect-square  cursor-pointer">
                   <Link
@@ -93,11 +93,11 @@ const Cart = ({ onClose }) => {
                   />
                 </div>
               </div>
-              <hr className="mb-3" />
+              <hr className="border-[#d0cdc8] mb-3" />
             </div>
           ))}
 
-          <hr />
+          <hr className="border-[#d0cdc8]" />
           <div className="p-5 ">
             <div className="flex justify-between font-light text-xl mb-2">
               <h3>Estimated total</h3>
@@ -106,13 +106,13 @@ const Cart = ({ onClose }) => {
             <span className="text-[14px] font-light">
               Taxes and shipping are calculated at checkout.
             </span>
-            <Link to="/CheckOutPage">
+            <Link to="/CheckOutPage" onClick={() => setShowCart(false)}>
               <button className="font-light rounded-lg bg-[#141414] text-[#fffcfc] w-full py-2 mt-5 hover:bg-gray-400 hover:underline  transition duration-400 ">
                 Checkout
               </button>
             </Link>
             <br />
-            <Link to="/ViewCartData">
+            <Link to="/ViewCartData" onClick={() => setShowCart(false)}>
               <button className="font-light hover:underline rounded-lg border text-[#141414] w-full py-2 mt-5 hover:bg-gray-200  transition duration-400 ">
                 View Cart
               </button>
