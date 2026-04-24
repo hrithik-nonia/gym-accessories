@@ -12,7 +12,7 @@ const CardItem = ({ cart }) => {
   return (
     <div className="min-w-[250px] md:min-w-[304px] p-3 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition duration-300 cursor-pointer relative flex flex-col">
       <Link
-        to="ShowSelectedProductPage"
+        to="/ShowSelectedProductPage"
         onClick={() => setSelectedProductId(cart.id)}
       >
         <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-xl absolute top-0 left-0">
@@ -29,7 +29,7 @@ const CardItem = ({ cart }) => {
 
       <div className="p-4 flex flex-col grow">
         <Link
-          to="ShowSelectedProductPage"
+          to="/ShowSelectedProductPage"
           onClick={() => setSelectedProductId(cart.id)}
         >
           <h2 className="text-lg font-light text-[#141414]">{cart.title}</h2>

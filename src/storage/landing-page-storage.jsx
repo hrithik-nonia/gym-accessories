@@ -16,9 +16,7 @@ const LandingPageStore = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product, qty) => {
-    console.log("addToCart called:", product.title, qty);
     setCartItems((prev) => {
-      console.log("prev cartItems:", prev);
       const existing = prev.find((item) => item.id === product.id);
 
       if (existing) {
@@ -30,6 +28,7 @@ const LandingPageStore = ({ children }) => {
       }
     });
   };
+
   // -------------for cart open------------
   const [showCart, setShowCart] = useState(false);
 
@@ -79,6 +78,7 @@ const LandingPageStore = ({ children }) => {
         selectedProductId,
         setSelectedProductId,
         scrollToTop,
+        setCartItems,
       }}
     >
       {children}

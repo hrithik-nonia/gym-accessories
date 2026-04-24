@@ -8,7 +8,7 @@ const MobileFilterMenu = () => {
   return (
     <>
       {/* ---------- top bar (visible on mobile only) ---------- */}
-      <div className="flex md:hidden rounded-lg border-gray-200 shadow-md px-3 block ">
+      <div className="flex md:hidden rounded-lg border-gray-200 shadow-md px-3  ">
         <div className="py-3 font-light text-[#141414] me-auto">
           18 products
         </div>

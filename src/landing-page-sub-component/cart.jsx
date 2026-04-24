@@ -1,13 +1,21 @@
 import { useContext } from "react";
 import { AppContext } from "../storage/landing-page-storage";
-import { LiaRupeeSignSolid } from "react-icons/lia";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Cart = ({ onClose }) => {
-  const { cartItems } = useContext(AppContext);
+  const { cartItems, setSelectedProductId, setCartItems } =
+    useContext(AppContext);
   const totalAmount = cartItems
     .reduce((total, item) => total + item.price * item.qty, 0)
     .toFixed(2);
+
+  // -------------filter cartitem by clicking delet button---------------
+  const handleDeletBtn = (id) => {
+    if (id !== null) {
+      setCartItems((prev) => prev.filter((item) => item.id !== id));
+    }
+  };
 
   return (
     <>
@@ -41,15 +49,34 @@ const Cart = ({ onClose }) => {
             <div key={item.id}>
               <div className=" flex mb-3 ">
                 <div className=" w-1/5 aspect-square  cursor-pointer">
-                  <img
-                    src={item.image}
-                    className="w-full h-full object-cover "
-                  />
+                  <Link
+                    to="/ShowSelectedProductPage"
+                    onClick={() => {
+                      setSelectedProductId(item.id);
+                      onClose();
+                    }}
+                  >
+                    <img
+                      src={item.image}
+                      className="w-full h-full object-cover "
+                    />
+                  </Link>
                 </div>
                 <div className="flex-1 px-4">
-                  <p className="text-sm font-light cursor-pointer">
-                    {item.title}
-                  </p>
+                  <Link
+                    to="/ShowSelectedProductPage"
+                    onClick={() => {
+                      setSelectedProductId(item.id);
+                      onClose();
+                    }}
+                  >
+                    <p
+                      className="text-sm font-light cursor-pointer"
+                      onClick={() => setSelectedProductId(item.id)}
+                    >
+                      {item.title}
+                    </p>
+                  </Link>
                   <p className="text-sm font-light mt-2 ">₹ {item.price}</p>
                   <div className="flex items-center">
                     <p className="text-sm font-light mt-1">Qty: {item.qty}</p>
@@ -59,7 +86,11 @@ const Cart = ({ onClose }) => {
                   </div>
                 </div>
                 <div>
-                  <MdDelete size={"30px"} className="cursor-pointer" />
+                  <MdDelete
+                    size={"30px"}
+                    className="cursor-pointer"
+                    onClick={() => handleDeletBtn(item.id)}
+                  />
                 </div>
               </div>
               <hr className="mb-3" />
@@ -75,13 +106,17 @@ const Cart = ({ onClose }) => {
             <span className="text-[14px] font-light">
               Taxes and shipping are calculated at checkout.
             </span>
-            <button className="font-light rounded-lg bg-[#141414] text-[#fffcfc] w-full py-2 mt-5 hover:bg-gray-400 hover:underline  transition duration-400 ">
-              Checkout
-            </button>
+            <Link to="/CheckOutPage">
+              <button className="font-light rounded-lg bg-[#141414] text-[#fffcfc] w-full py-2 mt-5 hover:bg-gray-400 hover:underline  transition duration-400 ">
+                Checkout
+              </button>
+            </Link>
             <br />
-            <button className="font-light hover:underline rounded-lg border text-[#141414] w-full py-2 mt-5 hover:bg-gray-200  transition duration-400 ">
-              View Cart
-            </button>
+            <Link to="/ViewCartData">
+              <button className="font-light hover:underline rounded-lg border text-[#141414] w-full py-2 mt-5 hover:bg-gray-200  transition duration-400 ">
+                View Cart
+              </button>
+            </Link>
           </div>
         </div>
       </div>

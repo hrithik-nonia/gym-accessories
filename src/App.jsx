@@ -1,6 +1,6 @@
 import MainSection from "./landing-page-component/landing-page";
 import NavBar from "./landing-page-component/navbar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import ShopAllPage from "./landing-page-sub-component/shop-all-page";
 import Footer from "./landing-page-component/footer";
 import LandingPageStore from "./storage/landing-page-storage";
@@ -12,24 +12,35 @@ import {
   storePolicyData,
   faqData,
 } from "./landing-page-sub-component/footer-sub-comp-data";
+import { AnimatePresence, motion } from "framer-motion";
+import CheckOutPage from "./landing-page-sub-component/check-out-btn-page";
+import ViewCartData from "./landing-page-sub-component/view-cart-data-page";
 
-function App() {
+// -----------animation routing----------------
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  // -------------hide navbar on checkout page------------
+  const hideNavbar = location.pathname === "/CheckOutPage";
+
   return (
     <>
-      <BrowserRouter>
-        <LandingPageStore>
-          {/* ----------route to show top of the page----------- */}
-          <ScrollToTop></ScrollToTop>
-          {/* ---------navbar add--------- */}
-          <NavBar />
-          <Routes>
+      {!hideNavbar && <NavBar />} {/* ✅ sirf checkout par hide hoga */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -30 }}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
+        >
+          <Routes location={location}>
             <Route path="/" element={<MainSection />} />
             <Route path="/shopNowPage" element={<ShopAllPage />} />
             <Route
               path="/ShowSelectedProductPage"
               element={<ShowSelectedProductPage />}
             />
-            {/* ✅ Teen alag routes — ek hi component */}
             <Route
               path="/shipping"
               element={<PolicyPage {...shippingData} />}
@@ -39,13 +50,26 @@ function App() {
               element={<PolicyPage {...storePolicyData} />}
             />
             <Route path="/faq" element={<PolicyPage {...faqData} />} />
+            <Route path="/CheckOutPage" element={<CheckOutPage />} />
+            <Route path="/ViewCartData" element={<ViewCartData />} />
           </Routes>
-
-          {/* --------footer------------ */}
-          <Footer />
-        </LandingPageStore>
-      </BrowserRouter>
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }
+
+function App() {
+  return (
+    <BrowserRouter>
+      <LandingPageStore>
+        <ScrollToTop />
+
+        <AnimatedRoutes />
+        <Footer />
+      </LandingPageStore>
+    </BrowserRouter>
+  );
+}
+
 export default App;
