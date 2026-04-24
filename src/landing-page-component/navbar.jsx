@@ -1,11 +1,12 @@
 import { RxAvatar } from "react-icons/rx";
 import { CiShoppingCart } from "react-icons/ci";
 import Heading from "./heading";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
 import Login from "../landing-page-sub-component/login";
 import { useState, useContext } from "react";
 import Cart from "../landing-page-sub-component/cart";
 import { AppContext } from "../storage/landing-page-storage";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -47,37 +48,49 @@ const NavBar = () => {
                 shop All
               </button>
               <div className="absolute top-full left-1/2 -translate-x-1/2 bg-[#fffcfc] border border-gray-200 rounded-lg py-2 min-w-42.5 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50 -translate-y-1.5 group-hover:translate-y-0 cursor-pointer">
-                <a
-                  href="#"
+                <Link
+                  to="/shopNowPage"
+                  state={{
+                    category: "Weight Training",
+                    img: "banner_3_section_2.jpg",
+                  }}
                   className="block px-4 py-2 text-[13px] text-[#141414] hover:bg-gray-50 hover:text-[#a9977b]"
                 >
-                  Weight Traning
-                </a>
-                <a
-                  href="#"
+                  Weight Training
+                </Link>
+                <Link
+                  to="/shopNowPage"
+                  state={{
+                    category: "Yoga & Pilates",
+                    img: "banner_for_section_2.webp",
+                  }}
                   className="block px-4 py-2 text-[13px] text-[#141414] hover:bg-gray-50 hover:text-[#a9977b]"
                 >
                   Yoga & Pilates
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/shopNowPage"
+                  state={{
+                    category: "Fitness Accessories",
+                    img: "banner_2_section_2.webp",
+                  }}
                   className="block px-4 py-2 text-[13px] text-[#141414] hover:bg-gray-50 hover:text-[#a9977b]"
                 >
                   Fitness Accessories
-                </a>
+                </Link>
               </div>
             </li>
 
             {/* --------contect btn---------- */}
             <li>
-              <Link
+              <ScrollLink
                 className="text-[#141414] cursor-pointer"
                 to="contact"
                 smooth={true}
                 duration={2500}
               >
                 Contact
-              </Link>
+              </ScrollLink>
             </li>
             <li>
               <button

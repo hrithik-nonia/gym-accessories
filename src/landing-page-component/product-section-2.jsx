@@ -63,7 +63,7 @@ const ProductSectionTwo = () => {
           <Link
             to="/shopNowPage"
             state={{
-              category: "Weight Traning",
+              category: "Weight Training",
               img: "banner_3_section_2.jpg",
             }}
           >
@@ -74,7 +74,7 @@ const ProductSectionTwo = () => {
               />
               <div className="absolute bottom-8 left-10 ">
                 <h3 className="text-[#fffcfc] font-bold text-3xl font-serif">
-                  Weight Traning
+                  Weight Training
                 </h3>
                 <p className="text-[#fffcfc] font-light font-serif mt-2">
                   Shop Collection
