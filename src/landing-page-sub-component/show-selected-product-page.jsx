@@ -12,6 +12,7 @@ import HorizontalScroll from "./scroll-able-product-section-2";
 import { AppContext } from "../storage/landing-page-storage";
 import { Link } from "react-router-dom";
 import LikedProductPage from "./liked-product-page";
+import OrderUnavailableModal from "./buy-btn-page";
 
 const ShowSelectedProductPage = () => {
   // ----------state for information list----------
@@ -67,6 +68,9 @@ const ShowSelectedProductPage = () => {
 
   // ----------Liked Product Page show------------
   const [showlikedProductPage, setShowLikedProductPage] = useState(false);
+
+  // -----------show buy page-------------
+  const [showBuyPage, setShowBuyPage] = useState(false);
 
   return (
     <>
@@ -139,7 +143,10 @@ const ShowSelectedProductPage = () => {
                   </button>
                 </div>
                 <div className="p-5">
-                  <button className="text-[#141414] bg-[#a9977b] py-2 rounded-lg w-full hover:bg-gray-200  transition-colors duration-300 ease-in-out cursor-pointer">
+                  <button
+                    className="text-[#141414] bg-[#a9977b] py-2 rounded-lg w-full hover:bg-gray-200  transition-colors duration-300 ease-in-out cursor-pointer"
+                    onClick={() => setShowBuyPage(true)}
+                  >
                     Buy Now
                   </button>
                 </div>
@@ -199,6 +206,10 @@ const ShowSelectedProductPage = () => {
 
       {showlikedProductPage && (
         <LikedProductPage onClose={() => setShowLikedProductPage(false)} />
+      )}
+
+      {showBuyPage && (
+        <OrderUnavailableModal onClose={() => setShowBuyPage(false)} />
       )}
     </>
   );
