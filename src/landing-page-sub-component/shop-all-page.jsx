@@ -3,7 +3,7 @@ import PriceRangeSlider from "./price-range-slider";
 import shopSectionBanner from "../assets/shop_now_banner.avif";
 import Card from "../landing-page-component/card";
 import MobileFilterMenu from "./burger-menu-for-shop-all-comp";
-import { useContext } from "react";
+import { useContext, useState, useMemo, useEffect } from "react";
 import { AppContext } from "../storage/landing-page-storage";
 import { Link, useLocation } from "react-router-dom";
 
@@ -14,6 +14,30 @@ const ShopAllPage = () => {
   // -----------state receiving------------
   const category = location.state?.category || "All Products";
   const image = location.state?.img || shopSectionBanner;
+
+  // -------------Price filter state-------------
+  const [minVal, setMinVal] = useState(0);
+  const [maxVal, setMaxVal] = useState(500);
+  const [maxPrice, setMaxPrice] = useState(500);
+
+  // ----------max price of product-----------
+  useEffect(() => {
+    if (cards && cards.length > 0) {
+      const max = Math.ceil(Math.max(...cards.map((c) => parseFloat(c.price))));
+      setMaxVal(max);
+      setMaxPrice(max);
+    }
+  }, [cards]);
+
+  // Step 2: Price filter (useMemo for performance)
+  const filteredCards = useMemo(() => {
+    if (!cards || cards.length === 0) return [];
+
+    return cards.filter((card) => {
+      const price = parseFloat(card.price);
+      return price >= minVal && price <= maxVal;
+    });
+  }, [cards, minVal, maxVal]);
 
   // Category ke hisaab se description
   const descriptions = {
@@ -28,6 +52,7 @@ const ShopAllPage = () => {
     "All Products":
       "This is your category description. It's a great place to tell customers what this category is about.",
   };
+
   return (
     <>
       <div className="px-0 md:px-20">
@@ -123,7 +148,13 @@ const ShopAllPage = () => {
             <hr />
 
             {/* ----------price range slider---------- */}
-            <PriceRangeSlider></PriceRangeSlider>
+            <PriceRangeSlider
+              minVal={minVal}
+              maxVal={maxVal}
+              setMinVal={setMinVal}
+              setMaxVal={setMaxVal}
+              maxLimit={maxPrice}
+            />
           </section>
 
           {/* -----------show product here------------- */}
@@ -148,12 +179,18 @@ const ShopAllPage = () => {
               </div>
             </div>
 
-            {/* --------------responsive product nanigation bar------------ */}
-            <MobileFilterMenu data={cards}></MobileFilterMenu>
+            {/* Pass filteredCards instead of cards */}
+            <MobileFilterMenu data={filteredCards} />
 
             {/* ---------product cards------------- */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-3 px-3 mdd:px-0">
-              <Card data={cards}></Card>
+              {filteredCards.length > 0 ? (
+                <Card data={filteredCards} />
+              ) : (
+                <p className="col-span-3 text-center text-gray-400 py-20">
+                  No products found in this price range.
+                </p>
+              )}
             </div>
           </div>
         </div>

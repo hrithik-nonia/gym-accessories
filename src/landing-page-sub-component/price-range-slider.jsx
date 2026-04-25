@@ -1,40 +1,91 @@
-import { useState, useCallback } from "react";
+import { useRef, useCallback } from "react";
 
-const MIN = 0;
-const MAX = 500;
-const STEP = 5;
-const GAP = 10;
+export default function PriceRangeSlider({
+  minVal,
+  maxVal,
+  setMinVal,
+  setMaxVal,
+  maxLimit,
+}) {
+  const MIN = 0;
+  const MAX = maxLimit;
+  const GAP = 5;
+  const trackRef = useRef(null);
+  const dragging = useRef(null); // "min" | "max" | null
 
-export default function PriceRangeSlider() {
-  const [minVal, setMinVal] = useState(20);
-  const [maxVal, setMaxVal] = useState(120);
-
-  const handleMin = useCallback(
-    (e) => {
-      const val = Math.min(Number(e.target.value), maxVal - GAP);
-      setMinVal(val);
+  const getValueFromPosition = useCallback(
+    (clientX) => {
+      const rect = trackRef.current.getBoundingClientRect();
+      const pct = Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1);
+      return Math.round(pct * (MAX - MIN) + MIN);
     },
-    [maxVal],
+    [MAX, MIN],
   );
 
-  const handleMax = useCallback(
+  const onMouseMove = useCallback(
     (e) => {
-      const val = Math.max(Number(e.target.value), minVal + GAP);
-      setMaxVal(val);
+      if (!dragging.current) return;
+      const val = getValueFromPosition(e.clientX);
+      if (dragging.current === "min") {
+        setMinVal(Math.min(val, maxVal - GAP));
+      } else {
+        setMaxVal(Math.max(val, minVal + GAP));
+      }
     },
-    [minVal],
+    [getValueFromPosition, minVal, maxVal, setMinVal, setMaxVal],
+  );
+
+  const onMouseUp = useCallback(() => {
+    dragging.current = null;
+    window.removeEventListener("mousemove", onMouseMove);
+    window.removeEventListener("mouseup", onMouseUp);
+  }, [onMouseMove]);
+
+  const startDrag = useCallback(
+    (thumb) => (e) => {
+      e.preventDefault();
+      dragging.current = thumb;
+      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mouseup", onMouseUp);
+    },
+    [onMouseMove, onMouseUp],
+  );
+
+  // Touch support
+  const onTouchMove = useCallback(
+    (e) => {
+      if (!dragging.current) return;
+      const val = getValueFromPosition(e.touches[0].clientX);
+      if (dragging.current === "min") {
+        setMinVal(Math.min(val, maxVal - GAP));
+      } else {
+        setMaxVal(Math.max(val, minVal + GAP));
+      }
+    },
+    [getValueFromPosition, minVal, maxVal, setMinVal, setMaxVal],
+  );
+
+  const onTouchEnd = useCallback(() => {
+    dragging.current = null;
+  }, []);
+
+  const startTouchDrag = useCallback(
+    (thumb) => (e) => {
+      dragging.current = thumb;
+    },
+    [],
   );
 
   const reset = () => {
-    setMinVal(20);
-    setMaxVal(120);
+    setMinVal(0);
+    setMaxVal(MAX);
   };
 
   const leftPct = ((minVal - MIN) / (MAX - MIN)) * 100;
   const rightPct = 100 - ((maxVal - MIN) / (MAX - MIN)) * 100;
 
   return (
-    <div className="mt-3">
+    <div className="mt-3 select-none px-3">
       {/* Header */}
       <div className="flex justify-between items-center mb-5">
         <span className="text-sm text-[#141414] font-light">Price</span>
@@ -53,8 +104,13 @@ export default function PriceRangeSlider() {
         <span className="text-[15px] font-light text-gray-900">${maxVal}</span>
       </div>
 
-      {/* Slider track */}
-      <div className="relative h-5 flex items-center mb-2">
+      {/* Track */}
+      <div
+        ref={trackRef}
+        className="relative h-5 flex items-center mb-2"
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         {/* Base track */}
         <div className="absolute w-full h-0.5 bg-gray-200 rounded-full" />
 
@@ -65,55 +121,19 @@ export default function PriceRangeSlider() {
         />
 
         {/* Min thumb */}
-        <input
-          type="range"
-          min={MIN}
-          max={MAX}
-          step={STEP}
-          value={minVal}
-          onChange={handleMin}
-          className="absolute w-full appearance-none bg-transparent pointer-events-none
-            [&::-webkit-slider-thumb]:appearance-none
-            [&::-webkit-slider-thumb]:pointer-events-auto
-            [&::-webkit-slider-thumb]:w-5
-            [&::-webkit-slider-thumb]:h-5
-            [&::-webkit-slider-thumb]:rounded-full
-            [&::-webkit-slider-thumb]:bg-gray-900
-            [&::-webkit-slider-thumb]:cursor-pointer
-            [&::-webkit-slider-thumb]:border-0
-            [&::-moz-range-thumb]:w-5
-            [&::-moz-range-thumb]:h-5
-            [&::-moz-range-thumb]:rounded-full
-            [&::-moz-range-thumb]:bg-gray-900
-            [&::-moz-range-thumb]:cursor-pointer
-            [&::-moz-range-thumb]:border-0"
-          style={{ zIndex: minVal > MAX - 20 ? 5 : 3 }}
+        <div
+          className="absolute w-5 h-5 bg-gray-900 rounded-full cursor-grab active:cursor-grabbing"
+          style={{ left: `calc(${leftPct}% - 10px)`, zIndex: 3 }}
+          onMouseDown={startDrag("min")}
+          onTouchStart={startTouchDrag("min")}
         />
 
         {/* Max thumb */}
-        <input
-          type="range"
-          min={MIN}
-          max={MAX}
-          step={STEP}
-          value={maxVal}
-          onChange={handleMax}
-          className="absolute w-full appearance-none bg-transparent pointer-events-none
-            [&::-webkit-slider-thumb]:appearance-none
-            [&::-webkit-slider-thumb]:pointer-events-auto
-            [&::-webkit-slider-thumb]:w-5
-            [&::-webkit-slider-thumb]:h-5
-            [&::-webkit-slider-thumb]:rounded-full
-            [&::-webkit-slider-thumb]:bg-gray-900
-            [&::-webkit-slider-thumb]:cursor-pointer
-            [&::-webkit-slider-thumb]:border-0
-            [&::-moz-range-thumb]:w-5
-            [&::-moz-range-thumb]:h-5
-            [&::-moz-range-thumb]:rounded-full
-            [&::-moz-range-thumb]:bg-gray-900
-            [&::-moz-range-thumb]:cursor-pointer
-            [&::-moz-range-thumb]:border-0"
-          style={{ zIndex: 4 }}
+        <div
+          className="absolute w-5 h-5 bg-gray-900 rounded-full cursor-grab active:cursor-grabbing"
+          style={{ left: `calc(${100 - rightPct}% - 10px)`, zIndex: 4 }}
+          onMouseDown={startDrag("max")}
+          onTouchStart={startTouchDrag("max")}
         />
       </div>
 
