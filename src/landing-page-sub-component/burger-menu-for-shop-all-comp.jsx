@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Dropdown from "./dropdown-of-shop-all";
 import PriceRangeSlider from "./price-range-slider";
-
-const MobileFilterMenu = () => {
+import { AppContext } from "../storage/landing-page-storage";
+const MobileFilterMenu = ({ data }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -34,7 +34,7 @@ const MobileFilterMenu = () => {
       {/* ---------- desktop bar ---------- */}
       <div className="hidden md:flex rounded-lg border-gray-200 shadow-md px-0">
         <div className="py-3 font-light text-[#141414] me-auto">
-          18 products
+          {`${data.length} products`}
         </div>
         <Dropdown />
       </div>

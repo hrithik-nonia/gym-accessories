@@ -5,10 +5,10 @@ import Card from "../landing-page-component/card";
 import MobileFilterMenu from "./burger-menu-for-shop-all-comp";
 import { useContext } from "react";
 import { AppContext } from "../storage/landing-page-storage";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const ShopAllPage = () => {
-  const { cards } = useContext(AppContext);
+  const { cards, scrollToTop } = useContext(AppContext);
   const location = useLocation();
 
   // -----------state receiving------------
@@ -22,6 +22,9 @@ const ShopAllPage = () => {
     "Fitness Accessories":
       "Fitness accessories jo aapki workout ko next level le jaaye.",
     "Weight Training": "Weight training ke liye premium equipment aur gear.",
+    "Best Sellers":
+      "This is your category description. It’s a great place to tell customers what this category is about, connect with your audience and draw attention to your products.",
+    Sale: "This is your category description. It’s a great place to tell customers what this category is about, connect with your audience and draw attention to your products.",
     "All Products":
       "This is your category description. It's a great place to tell customers what this category is about.",
   };
@@ -29,9 +32,9 @@ const ShopAllPage = () => {
     <>
       <div className="px-0 md:px-20">
         <div className=" flex gap-1 font-light items-center text-[#141414]  px-3 md:py-6 py-3">
-          <p> Home</p>
+          <Link to="/"> Home</Link>
           <PiCaretRightLight />
-          <p>All Products</p>
+          <p>{category}</p>
         </div>
 
         <div className="flex">
@@ -42,24 +45,74 @@ const ShopAllPage = () => {
             <div className="mb-12 text-[#141414]">
               <span className="text-[22px] block mb-3">Browse by</span>
               <hr />
-              <ul className="text-[15px] pt-3">
+              <ul className="text-[15px] pt-3 ">
                 <li className="mb-3">
-                  <span>All Products</span>
+                  <span
+                    className="cursor-pointer hover:underline transition duration-500"
+                    onClick={() => scrollToTop(1500)}
+                  >
+                    All Products
+                  </span>
                 </li>
                 <li className="mb-3">
-                  <span>Best Sellers</span>
+                  <Link
+                    to="/shopNowPage"
+                    state={{
+                      category: "Best Sellers",
+                      img: "banner_for_best_seller.avif",
+                    }}
+                    className="hover:underline transition duration-500"
+                  >
+                    Best Sellers
+                  </Link>
                 </li>
                 <li className="mb-3">
-                  <span>Fitness Accessories</span>
+                  <Link
+                    to="/shopNowPage"
+                    state={{
+                      category: "Fitness Accessories",
+                      img: "banner_2_section_2.webp",
+                    }}
+                    className="hover:underline transition duration-500"
+                  >
+                    Fitness Accessories
+                  </Link>
                 </li>
                 <li className="mb-3">
-                  <span>Sale</span>
+                  <Link
+                    to="/shopNowPage"
+                    state={{
+                      category: "Sale",
+                      img: "banner_for_sale.avif",
+                    }}
+                    className="hover:underline transition duration-500"
+                  >
+                    Sale
+                  </Link>
                 </li>
                 <li className="mb-3">
-                  <span>Weight Training</span>
+                  <Link
+                    to="/shopNowPage"
+                    state={{
+                      category: "Weight Training",
+                      img: "banner_3_section_2.jpg",
+                    }}
+                    className="hover:underline transition duration-500"
+                  >
+                    Weight Training
+                  </Link>
                 </li>
                 <li className="mb-3">
-                  <span>Yoga & Pilates</span>
+                  <Link
+                    to="/shopNowPage"
+                    state={{
+                      category: "Yoga & Pilates",
+                      img: "banner_for_section_2.webp",
+                    }}
+                    className="hover:underline transition duration-500"
+                  >
+                    Yoga & Pilates
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -96,7 +149,7 @@ const ShopAllPage = () => {
             </div>
 
             {/* --------------responsive product nanigation bar------------ */}
-            <MobileFilterMenu></MobileFilterMenu>
+            <MobileFilterMenu data={cards}></MobileFilterMenu>
 
             {/* ---------product cards------------- */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-3 px-3 mdd:px-0">
