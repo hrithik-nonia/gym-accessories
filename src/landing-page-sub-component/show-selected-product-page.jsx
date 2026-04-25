@@ -10,13 +10,27 @@ import { FaPinterest, FaWhatsapp } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import HorizontalScroll from "./scroll-able-product-section-2";
 import { AppContext } from "../storage/landing-page-storage";
+import { Link } from "react-router-dom";
+import LikedProductPage from "./liked-product-page";
 
 const ShowSelectedProductPage = () => {
   // ----------state for information list----------
   const [openIndex, setOpenIndex] = useState(0);
 
   // -------------show selected item at top of the page--------------
-  const { selectedProductId, cards } = useContext(AppContext);
+  const { selectedProductId, cards, addToCart, setShowCart } =
+    useContext(AppContext);
+
+  // ---------add count state--------
+  const [quantity, setQuantity] = useState(1);
+
+  // ---------handle add to cart btn----------
+  const handleAddToCart = () => {
+    if (showProductData && quantity > 0) {
+      addToCart(showProductData, quantity); // cart mein add
+      setShowCart(true); // cart open
+    }
+  };
 
   // -------------create state for filtered product to show top of the page-----------
   const [showProductData, setShowProductData] = useState(null);
@@ -51,12 +65,19 @@ const ShowSelectedProductPage = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  // ----------Liked Product Page show------------
+  const [showlikedProductPage, setShowLikedProductPage] = useState(false);
+
   return (
     <>
       <div>
         <div className="b  w-[60%] mx-auto py-6">
           <div className="py-6 font-light text-[14px] flex">
-            <div>Home / Yoga & Pilates / I'm a product</div>
+            {showProductData && (
+              <div>
+                <Link to="/">Home </Link>/ {showProductData.title}
+              </div>
+            )}
             <div className="ms-auto">Prev | Next</div>
           </div>
 
@@ -86,22 +107,34 @@ const ShowSelectedProductPage = () => {
 
                 {/* ----------product quantity---------- */}
                 <div className=" mt-5  flex items-center justify-between  gap-2 w-[20px]">
-                  <button className="cursor-pointer">
+                  <button
+                    className="cursor-pointer"
+                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  >
                     <CiCircleMinus size={"30px"} />
                   </button>
 
-                  <span className=" text-center">0</span>
+                  <span className=" text-center">{quantity}</span>
 
-                  <button className="cursor-pointer">
+                  <button
+                    className="cursor-pointer"
+                    onClick={() => setQuantity((q) => q + 1)}
+                  >
                     <CiCirclePlus size={"30px"} />
                   </button>
                 </div>
 
                 <div className="flex gap-2 px-5 mt-5">
-                  <button className="font-light bg-[#141414] text-[#fffcfc] flex-1 py-2 rounded-lg hover:bg-gray-400 hover:text-[#141414] transition-colors duration-300 ease-in-out cursor-pointer">
+                  <button
+                    className="font-light bg-[#141414] text-[#fffcfc] flex-1 py-2 rounded-lg hover:bg-gray-400 hover:text-[#141414] transition-colors duration-300 ease-in-out cursor-pointer"
+                    onClick={handleAddToCart}
+                  >
                     Add To Cart
                   </button>
-                  <button className="border rounded-lg px-1 hover:bg-[#B01E28]  transition-colors duration-300 ease-in-out cursor-pointer">
+                  <button
+                    className="border rounded-lg px-1 hover:bg-[#B01E28]  transition-colors duration-300 ease-in-out cursor-pointer"
+                    onClick={() => setShowLikedProductPage(true)}
+                  >
                     <CiHeart size={"30px"} />
                   </button>
                 </div>
@@ -163,6 +196,10 @@ const ShowSelectedProductPage = () => {
         {/* --------------scrolla able cards------------- */}
         <HorizontalScroll></HorizontalScroll>
       </div>
+
+      {showlikedProductPage && (
+        <LikedProductPage onClose={() => setShowLikedProductPage(false)} />
+      )}
     </>
   );
 };

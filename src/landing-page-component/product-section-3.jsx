@@ -34,7 +34,10 @@ const ProductSectionThree = () => {
 
         {/* -----------add card-------------- */}
         <div className=" md:m-15 grid grid-cols-[auto_1fr_auto] items-center gap-4 mx-0 my-10">
-          <button className="text-[#141414]" onClick={scrollLeft}>
+          <button
+            className="text-[#141414] cursor-pointer"
+            onClick={scrollLeft}
+          >
             <CiCircleChevLeft size={"40px"} />
           </button>
           <div
@@ -44,7 +47,10 @@ const ProductSectionThree = () => {
           >
             <Card data={womensCards}></Card>
           </div>
-          <button className="text-[#141414] " onClick={scrollRight}>
+          <button
+            className="text-[#141414] cursor-pointer"
+            onClick={scrollRight}
+          >
             <CiCircleChevRight size={"40px"} />
           </button>
         </div>

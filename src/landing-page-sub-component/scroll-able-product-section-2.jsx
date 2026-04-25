@@ -1,65 +1,6 @@
 import { useRef, useContext } from "react";
 import { AppContext } from "../storage/landing-page-storage";
 
-// const cards = [
-//   {
-//     id: 1,
-//     title: "Mountain Escape",
-//     tag: "Nature",
-//     color: "bg-emerald-100",
-//     text: "text-emerald-700",
-//     desc: "Explore serene mountain trails and breathtaking views.",
-//   },
-//   {
-//     id: 2,
-//     title: "City Lights",
-//     tag: "Urban",
-//     color: "bg-violet-100",
-//     text: "text-violet-700",
-//     desc: "Discover the buzz of city nightlife and culture.",
-//   },
-//   {
-//     id: 3,
-//     title: "Ocean Breeze",
-//     tag: "Beach",
-//     color: "bg-sky-100",
-//     text: "text-sky-700",
-//     desc: "Relax on white sandy beaches with gentle waves.",
-//   },
-//   {
-//     id: 4,
-//     title: "Desert Sun",
-//     tag: "Adventure",
-//     color: "bg-amber-100",
-//     text: "text-amber-700",
-//     desc: "Journey through vast golden dunes at sunrise.",
-//   },
-//   {
-//     id: 5,
-//     title: "Forest Walk",
-//     tag: "Nature",
-//     color: "bg-lime-100",
-//     text: "text-lime-700",
-//     desc: "Wander through ancient forests full of life.",
-//   },
-//   {
-//     id: 6,
-//     title: "Snow Peak",
-//     tag: "Winter",
-//     color: "bg-blue-100",
-//     text: "text-blue-700",
-//     desc: "Experience the magic of snow-capped mountain tops.",
-//   },
-//   {
-//     id: 7,
-//     title: "Sunset Valley",
-//     tag: "Scenic",
-//     color: "bg-rose-100",
-//     text: "text-rose-700",
-//     desc: "Watch stunning sunsets over rolling green valleys.",
-//   },
-// ];
-
 export default function HorizontalScroll() {
   const { cards } = useContext(AppContext);
 
@@ -87,7 +28,7 @@ export default function HorizontalScroll() {
           <div className="flex gap-2">
             <button
               onClick={() => scroll(-1)}
-              className="w-9 h-9 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-gray-100 active:scale-95 transition-all"
+              className="w-9 h-9 rounded-full border border-gray-200 bg-white flex items-center justify-center hover:bg-gray-100 active:scale-95 transition-all "
             >
               <svg
                 width="16"
@@ -98,7 +39,7 @@ export default function HorizontalScroll() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-gray-600"
+                className="text-gray-600 "
               >
                 <polyline points="15 18 9 12 15 6" />
               </svg>
