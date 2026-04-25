@@ -1,6 +1,15 @@
 import { useState } from "react";
 
-export default function Dropdown() {
+const sortOptions = [
+  "Recommended",
+  "Newest",
+  "Price (low to high)",
+  "Price (high to low)",
+  "Name A-Z",
+  "Name Z-A",
+];
+
+export default function Dropdown({ sortOption, setSortOption }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -9,7 +18,7 @@ export default function Dropdown() {
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 px-4 py-2   border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-50 font-light h-full"
       >
-        Sort by: Recommended
+        Sort by: {sortOption}
         <svg
           className={`w-4 h-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           viewBox="0 0 20 20"
@@ -24,37 +33,23 @@ export default function Dropdown() {
       </button>
 
       {open && (
-        <div className="absolute mt-1 w-40 bg-white border border-gray-100 rounded-lg overflow-hidden z-10">
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-          >
-            About
-          </a>
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-          >
-            Services
-          </a>
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-          >
-            Portfolio
-          </a>
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-          >
-            Contact
-          </a>
+        <div className="absolute mt-1 w-48 bg-white border border-gray-100 rounded-lg overflow-hidden z-10 font-light">
+          {sortOptions.map((option) => (
+            <button
+              key={option}
+              onClick={() => {
+                setSortOption(option);
+                setOpen(false);
+              }}
+              className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-50 ${
+                sortOption === option
+                  ? "text-gray-900 font-medium"
+                  : "text-gray-700"
+              }`}
+            >
+              {option}
+            </button>
+          ))}
         </div>
       )}
     </div>

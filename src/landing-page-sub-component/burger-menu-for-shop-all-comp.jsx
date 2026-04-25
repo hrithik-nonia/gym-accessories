@@ -2,15 +2,25 @@ import { useState } from "react";
 import Dropdown from "./dropdown-of-shop-all";
 import PriceRangeSlider from "./price-range-slider";
 import { AppContext } from "../storage/landing-page-storage";
-const MobileFilterMenu = ({ data }) => {
+const MobileFilterMenu = ({
+  data,
+  minVal,
+  maxVal,
+  setMinVal,
+  setMaxVal,
+  maxLimit,
+  sortOption,
+  setSortOption, // add karo
+}) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       {/* ---------- top bar (visible on mobile only) ---------- */}
       <div className="flex md:hidden rounded-lg border-gray-200 shadow-md px-3  ">
+        {/* -----------product count dynamic------------ */}
         <div className="py-3 font-light text-[#141414] me-auto">
-          18 products
+          {`${data.length} products`}
         </div>
 
         {/* burger icon */}
@@ -36,7 +46,8 @@ const MobileFilterMenu = ({ data }) => {
         <div className="py-3 font-light text-[#141414] me-auto">
           {`${data.length} products`}
         </div>
-        <Dropdown />
+        {/* ---------desktop dropdown------------ */}
+        <Dropdown sortOption={sortOption} setSortOption={setSortOption} />
       </div>
 
       {/* ---------- overlay ---------- */}
@@ -81,7 +92,8 @@ const MobileFilterMenu = ({ data }) => {
               Sort by
             </span>
             <hr className="mb-3" />
-            <Dropdown />
+            {/* -------------mobile dropdown-------------- */}
+            <Dropdown sortOption={sortOption} setSortOption={setSortOption} />
           </div>
 
           {/* browse by */}
@@ -115,7 +127,13 @@ const MobileFilterMenu = ({ data }) => {
             <h2>Filter by</h2>
           </div>
           <hr />
-          <PriceRangeSlider />
+          <PriceRangeSlider
+            minVal={minVal}
+            maxVal={maxVal}
+            setMinVal={setMinVal}
+            setMaxVal={setMaxVal}
+            maxLimit={maxLimit}
+          />
         </div>
       </div>
     </>

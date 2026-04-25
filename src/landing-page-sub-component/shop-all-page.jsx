@@ -11,6 +11,9 @@ const ShopAllPage = () => {
   const { cards, scrollToTop } = useContext(AppContext);
   const location = useLocation();
 
+  // Sort state add karo
+  const [sortOption, setSortOption] = useState("Recommended");
+
   // -----------state receiving------------
   const category = location.state?.category || "All Products";
   const image = location.state?.img || shopSectionBanner;
@@ -38,6 +41,25 @@ const ShopAllPage = () => {
       return price >= minVal && price <= maxVal;
     });
   }, [cards, minVal, maxVal]);
+
+  // ----------shorted card----------------
+  const sortedCards = useMemo(() => {
+    const arr = [...filteredCards];
+    switch (sortOption) {
+      case "Price (low to high)":
+        return arr.sort((a, b) => a.price - b.price);
+      case "Price (high to low)":
+        return arr.sort((a, b) => b.price - a.price);
+      case "Name A-Z":
+        return arr.sort((a, b) => a.title.localeCompare(b.title));
+      case "Name Z-A":
+        return arr.sort((a, b) => b.title.localeCompare(a.title));
+      case "Newest":
+        return arr.sort((a, b) => b.id - a.id);
+      default:
+        return arr; // Recommended — original order
+    }
+  }, [filteredCards, sortOption]);
 
   // Category ke hisaab se description
   const descriptions = {
@@ -180,12 +202,21 @@ const ShopAllPage = () => {
             </div>
 
             {/* Pass filteredCards instead of cards */}
-            <MobileFilterMenu data={filteredCards} />
+            <MobileFilterMenu
+              data={sortedCards}
+              minVal={minVal}
+              maxVal={maxVal}
+              setMinVal={setMinVal}
+              setMaxVal={setMaxVal}
+              maxLimit={maxPrice}
+              sortOption={sortOption}
+              setSortOption={setSortOption}
+            />
 
             {/* ---------product cards------------- */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-3 px-3 mdd:px-0">
-              {filteredCards.length > 0 ? (
-                <Card data={filteredCards} />
+              {sortedCards.length > 0 ? (
+                <Card data={sortedCards} />
               ) : (
                 <p className="col-span-3 text-center text-gray-400 py-20">
                   No products found in this price range.
