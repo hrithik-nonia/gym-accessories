@@ -19,8 +19,13 @@ const ShowSelectedProductPage = () => {
   const [openIndex, setOpenIndex] = useState(0);
 
   // -------------show selected item at top of the page--------------
-  const { selectedProductId, cards, addToCart, setShowCart } =
-    useContext(AppContext);
+  const {
+    selectedProductId,
+    setSelectedProductId,
+    cards,
+    addToCart,
+    setShowCart,
+  } = useContext(AppContext);
 
   // ---------add count state--------
   const [quantity, setQuantity] = useState(1);
@@ -72,6 +77,28 @@ const ShowSelectedProductPage = () => {
   // -----------show buy page-------------
   const [showBuyPage, setShowBuyPage] = useState(false);
 
+  // ------------current index find ----------
+  const currentIndex = cards.findIndex(
+    (item) => item.id === showProductData?.id,
+  );
+  const isFirst = currentIndex <= 0;
+  const isLast = currentIndex === cards.length - 1;
+
+  // ---------prev button handler------------
+  const handlePrev = () => {
+    const prevProduct = cards[currentIndex - 1];
+    setSelectedProductId(prevProduct.id); // context update
+    localStorage.setItem("selectedProductId", prevProduct.id); // localStorage update
+    window.scrollTo({ top: 0, behavior: "smooth" }); // page top pe
+  };
+  // ------------next btn handler----------
+  const handleNext = () => {
+    const nextProduct = cards[currentIndex + 1];
+    setSelectedProductId(nextProduct.id);
+    localStorage.setItem("selectedProductId", nextProduct.id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
       <div>
@@ -82,7 +109,23 @@ const ShowSelectedProductPage = () => {
                 <Link to="/">Home </Link>/ {showProductData.title}
               </div>
             )}
-            <div className="ms-auto">Prev | Next</div>
+            <div className="ms-auto">
+              <button
+                onClick={handlePrev}
+                disabled={isFirst}
+                className="cursor-pointer"
+              >
+                Prev
+              </button>
+              |
+              <button
+                onClick={handleNext}
+                disabled={isLast}
+                className="cursor-pointer"
+              >
+                Next
+              </button>
+            </div>
           </div>
 
           {showProductData && (
