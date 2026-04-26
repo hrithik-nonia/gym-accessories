@@ -2,7 +2,7 @@ import { useRef, useContext } from "react";
 import { AppContext } from "../storage/landing-page-storage";
 
 export default function HorizontalScroll() {
-  const { cards } = useContext(AppContext);
+  const { cards, setSelectedProductId } = useContext(AppContext);
 
   // ----------for horizontal scroll effect---------
   const scrollRef = useRef(null);
@@ -77,6 +77,7 @@ export default function HorizontalScroll() {
               <div
                 key={card.id}
                 className="flex-shrink-0 w-60 bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-md transition-shadow duration-200 cursor-pointer"
+                onClick={() => setSelectedProductId(card.id)}
               >
                 <div className="aspect-square w-full overflow-hidden rounded-xl">
                   <img
